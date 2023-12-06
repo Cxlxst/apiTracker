@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\PartieRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PartieRepository;
 
 #[ORM\Entity(repositoryClass: PartieRepository::class)]
 class Partie
@@ -13,37 +13,20 @@ class Partie
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $idMatch = null;
+    #[ORM\OneToOne(targetEntity: UserMatch::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private $userMatch;
 
-    #[ORM\Column]
-    private ?int $idUser = null;
-
-    public function getId(): ?int
-    {
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getIdMatch(): ?int
-    {
-        return $this->idMatch;
+    public function getUserMatch(): ?UserMatch {
+        return $this->userMatch;
     }
 
-    public function setIdMatch(int $idMatch): static
-    {
-        $this->idMatch = $idMatch;
-
-        return $this;
-    }
-
-    public function getIdUser(): ?int
-    {
-        return $this->idUser;
-    }
-
-    public function setIdUser(int $idUser): static
-    {
-        $this->idUser = $idUser;
+    public function setUserMatch(?UserMatch $userMatch): self {
+        $this->userMatch = $userMatch;
 
         return $this;
     }
