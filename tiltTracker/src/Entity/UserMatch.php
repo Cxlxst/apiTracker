@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserMatchRepository;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserMatchRepository::class)]
 class UserMatch
@@ -28,77 +28,76 @@ class UserMatch
     #[ORM\Column(nullable: true)]
     private ?int $nbMatchsPerdus = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'userMatches')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\OneToOne(mappedBy: 'idUser', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
-    #[ORM\OneToOne(mappedBy: 'userMatch', targetEntity: Partie::class, cascade: ['persist', 'remove'])]
-    private ?Partie $partie = null;
-
-    public function getId(): ?int {
+    public function getId(): ?int
+    {
         return $this->id;
     }
 
-    public function getFrags(): ?int {
+    public function getFrags(): ?int
+    {
         return $this->frags;
     }
 
-    public function setFrags(?int $frags): self {
+    public function setFrags(?int $frags): static
+    {
         $this->frags = $frags;
+
         return $this;
     }
 
-    public function getMorts(): ?int {
+    public function getMorts(): ?int
+    {
         return $this->morts;
     }
 
-    public function setMorts(?int $morts): self {
+    public function setMorts(?int $morts): static
+    {
         $this->morts = $morts;
+
         return $this;
     }
 
-    public function getAssists(): ?int {
+    public function getAssists(): ?int
+    {
         return $this->assists;
     }
 
-    public function setAssists(int $assists): self {
+    public function setAssists(int $assists): static
+    {
         $this->assists = $assists;
+
         return $this;
     }
 
-    public function getNbMatchsGagnes(): ?int {
+    public function getNbMatchsGagnes(): ?int
+    {
         return $this->nbMatchsGagnes;
     }
 
-    public function setNbMatchsGagnes(?int $nbMatchsGagnes): self {
+    public function setNbMatchsGagnes(?int $nbMatchsGagnes): static
+    {
         $this->nbMatchsGagnes = $nbMatchsGagnes;
+
         return $this;
     }
 
-    public function getNbMatchsPerdus(): ?int {
+    public function getNbMatchsPerdus(): ?int
+    {
         return $this->nbMatchsPerdus;
     }
 
-    public function setNbMatchsPerdus(?int $nbMatchsPerdus): self {
+    public function setNbMatchsPerdus(?int $nbMatchsPerdus): static
+    {
         $this->nbMatchsPerdus = $nbMatchsPerdus;
+
         return $this;
     }
 
-    public function getUser(): ?User {
+    public function getUser(): ?User
+    {
         return $this->user;
-    }
-
-    public function setUser(?User $user): self {
-        $this->user = $user;
-        return $this;
-    }
-
-    public function getPartie(): ?Partie {
-        return $this->partie;
-    }
-
-    public function setPartie(?Partie $partie): self {
-        $this->partie = $partie;
-        return $this;
     }
 }
