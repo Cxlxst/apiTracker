@@ -10,24 +10,23 @@ class Partie
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\OneToOne(targetEntity: UserMatch::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'parties')]
     #[ORM\JoinColumn(nullable: false)]
-    private $userMatch;
+    private ?User $user = null;
 
     public function getId(): ?int {
         return $this->id;
     }
 
-    public function getUserMatch(): ?UserMatch {
-        return $this->userMatch;
+    public function getUser(): ?User {
+        return $this->user;
     }
 
-    public function setUserMatch(?UserMatch $userMatch): self {
-        $this->userMatch = $userMatch;
-
+    public function setUser(?User $user): self {
+        $this->user = $user;
         return $this;
     }
 }
