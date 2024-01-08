@@ -10,30 +10,27 @@ class UserMatch
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $frags = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $morts = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $assists = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $nbMatchsGagnes = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $nbMatchsPerdus = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'userMatches')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
-
-    #[ORM\OneToOne(mappedBy: 'userMatch', targetEntity: Partie::class, cascade: ['persist', 'remove'])]
-    private ?Partie $partie = null;
 
     public function getId(): ?int {
         return $this->id;
@@ -90,15 +87,6 @@ class UserMatch
 
     public function setUser(?User $user): self {
         $this->user = $user;
-        return $this;
-    }
-
-    public function getPartie(): ?Partie {
-        return $this->partie;
-    }
-
-    public function setPartie(?Partie $partie): self {
-        $this->partie = $partie;
         return $this;
     }
 }
