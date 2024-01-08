@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UsersController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+</style>
+
+    <h2>Data from API:</h2>
+
+
+    {# Récupération de la liste de tout les joueurs #}
+    <div class="example-wrapper">
+        <h2>Data from API:</h2>
+        <div id="divListeJoueur"></div>
+        <script src="{{ asset('js/appelApi.js') }}" data-api-option="getListe"></script>
+    </div>
+
+
+    {# Cette requête permet de faire appel à une fonction par appuisur un boutton #}
+    {# <div class="example-wrapper">
+        <h2>Appel de l'api</h2>
+        <button id="executeApiButton">Execute API Script</button>
+    </div> #}
+
+
+    <div class="example-wrapper">
+        <h2>Récupération des données d'un compte</h2>
+        <div id="affichageFicheJoeur"></div>
+    </div>
+
+
+    <script type="text/javascript">
+
+        //Cette requête est appelé au moment ou la liste des utilisateurs est récupérer par l'appel api, elle affiche ensuite un tableau
+        function miseEnPlaceListeJoueur(data) {
+            var table = document.createElement('table');
+            table.border = '1';
+
+            var thead = document.createElement('thead');
+            var headerRow = thead.insertRow();
+            Object.keys(data[0]).forEach(function(key) {
+                var th = document.createElement('th');
+                th.appendChild(document.createTextNode(key));
+                headerRow.appendChild(th);
+            });
+            table.appendChild(thead);
+
+            var tbody = document.createElement('tbody');
+            data.forEach(function(item) {
+
+                var row = tbody.insertRow();
+                Object.values(item).forEach(function(value) {
+                    var cell = row.insertCell();
+                    cell.appendChild(document.createTextNode(value));
+                });
+
+                // Ajout du bouton pour consulter le profil
+                var cellButton = row.insertCell();
+                var button = document.createElement('button');
+                button.innerHTML = 'voir le profil';
+                button.addEventListener('click', function() {
+                    recuperationDonneAffichageCompte(item.id)
+                });
+                cellButton.appendChild(button); 
+
+            });
+
+            table.appendChild(tbody);
+
+            document.getElementById('divListeJoueur').appendChild(table);
+        }
+
+
+
+       
+        //Récuperation des données de l'utilisateur
+        function recuperationDonneAffichageCompte(idFicheJoueur){
+            const script = document.createElement('script');
+            script.src = "{{ asset('js/appelApi.js') }}";
+            script.setAttribute('data-api-option', 'getSpecificAccount,'+ idFicheJoueur);
+
+            document.body.appendChild(script);
+
+            script.onload = function () {
+                document.body.removeChild(script);
+            };
+        }
+
+        //Permet d'executer une fonction js si on appui sur un boutton
+        //document.getElementById('executeApiButton').addEventListener('click', recuperationDonneAffichageCompte);
+
+        function miseEnPlaceVisionnageFicheJoueur(data) {
+
+            var table2 = document.createElement('table2');
+            table2.border = '1';
+
+            var thead = document.createElement('thead');
+            var headerRow = thead.insertRow();
+
+            Object.keys(data).forEach(function(key) {
+                var th = document.createElement('th');
+                th.appendChild(document.createTextNode(key));
+                headerRow.appendChild(th);
+            });
+            table2.appendChild(thead);
+
+            var tbody = document.createElement('tbody');
+            var row = tbody.insertRow();
+
+            Object.values(data).forEach(function(value) {
+                var cell = row.insertCell();
+                cell.appendChild(document.createTextNode(value));
+            });
+
+            // Ajout du bouton pour consulter le profil
+            var cellButton = row.insertCell();
+            var button = document.createElement('button');
+            button.innerHTML = 'Inverser le statut';
+            button.addEventListener('click', function() {
+                changementDuStatutDuProfil(data.id, data.statut)
+            });
+            cellButton.appendChild(button); 
+
+
+
+            table2.appendChild(tbody);
+
+            document.getElementById('affichageFicheJoeur').appendChild(table2);
+
+        }
+
+
+        //Permet d'inverser le statutDu profil (visible/masqué)
+        function changementDuStatutDuProfil(idFicheJoueur,statutActuelFiche){
+            const script = document.createElement('script');
+            script.src = "{{ asset('js/appelApi.js') }}";
+            script.setAttribute('data-api-option', 'updateStatut,'+ idFicheJoueur +','+ statutActuelFiche);
+
+            document.body.appendChild(script);
+
+            script.onload = function () {
+                document.body.removeChild(script);
+            };
+        }
+
+
+
+        
+
+
+    </script>
+
+
+
+{% endblock %}
