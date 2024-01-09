@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\UserMatch;
+use App\Entity\UserMatchStat;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<UserMatch>
+ * @extends ServiceEntityRepository<UserMatchStat>
  *
- * @method UserMatch|null find($id, $lockMode = null, $lockVersion = null)
- * @method UserMatch|null findOneBy(array $criteria, array $orderBy = null)
- * @method UserMatch[]    findAll()
- * @method UserMatch[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method UserMatchStat|null find($id, $lockMode = null, $lockVersion = null)
+ * @method UserMatchStat|null findOneBy(array $criteria, array $orderBy = null)
+ * @method UserMatchStat[]    findAll()
+ * @method UserMatchStat[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserMatchRepository extends ServiceEntityRepository
+class UserMatchStatRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, UserMatch::class);
+        parent::__construct($registry, UserMatchStat::class);
     }
 
 //    /**
-//     * @return UserMatch[] Returns an array of UserMatch objects
+//     * @return UserMatchStat[] Returns an array of UserMatchStat objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class UserMatchRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?UserMatch
+//    public function findOneBySomeField($value): ?UserMatchStat
 //    {
 //        return $this->createQueryBuilder('u')
 //            ->andWhere('u.exampleField = :val')

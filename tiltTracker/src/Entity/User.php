@@ -2,12 +2,9 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use App\Repository\UserRepository;
 use ApiPlatform\Metadata\ApiResource;
-
+use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource]
@@ -18,87 +15,63 @@ class User
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $pseudo = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $niveau_compte = null;
+    #[ORM\Column]
+    private ?int $nb_match = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $nbMatch = null;
+    #[ORM\OneToOne(mappedBy: 'user_id', cascade: ['persist', 'remove'])]
+    private ?MatchUser $matchUser = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $statut = null;
-
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserMatch::class, cascade: ['persist', 'remove'])]
-    private Collection $userMatches;
-
-    public function __construct() {
-        $this->userMatches = new ArrayCollection();
-    }
-
-    public function getId(): ?int {
+    public function getId(): ?int
+    {
         return $this->id;
     }
 
-    public function getPseudo(): ?string {
+    public function getPseudo(): ?string
+    {
         return $this->pseudo;
     }
 
-    public function setPseudo(?string $pseudo): self {
+    public function setPseudo(string $pseudo): static
+    {
         $this->pseudo = $pseudo;
+
         return $this;
     }
 
-    public function getNiveauCompte(): ?int {
-        return $this->niveau_compte;
+    public function getNbMatch(): ?int
+    {
+        return $this->nb_match;
     }
 
-    public function setNiveauCompte(?int $niveau_compte): self {
-        $this->niveau_compte = $niveau_compte;
+    public function setNbMatch(int $nb_match): static
+    {
+        $this->nb_match = $nb_match;
+
         return $this;
     }
 
-    public function getNbMatch(): ?int {
-        return $this->nbMatch;
+    public function getMatchUser(): ?MatchUser
+    {
+        return $this->matchUser;
     }
 
-    public function setNbMatch(?int $nbMatch): self {
-        $this->nbMatch = $nbMatch;
-        return $this;
-    }
-
-    public function getStatut(): ?string {
-        return $this->statut;
-    }
-
-    public function setStatut(?string $statut): self {
-        $this->statut = $statut;
-        return $this;
-    }
-
-    /**
-     * @return Collection|UserMatch[]
-     */
-    public function getUserMatches(): Collection {
-        return $this->userMatches;
-    }
-
-    public function addUserMatch(UserMatch $userMatch): self {
-        if (!$this->userMatches->contains($userMatch)) {
-            $this->userMatches[] = $userMatch;
-            $userMatch->setUser($this);
+    public function setMatchUser(?MatchUser $matchUser): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($matchUser === null && $this->matchUser !== null) {
+            $this->matchUser->setUserId(null);
         }
-        return $this;
-    }
 
-    public function removeUserMatch(UserMatch $userMatch): self {
-        if ($this->userMatches->removeElement($userMatch)) {
-            // set the owning side to null (unless already changed)
-            if ($userMatch->getUser() === $this) {
-                $userMatch->setUser(null);
-            }
+        // set the owning side of the relation if necessary
+        if ($matchUser !== null && $matchUser->getUserId() !== $this) {
+            $matchUser->setUserId($this);
         }
+
+        $this->matchUser = $matchUser;
+
         return $this;
     }
 }
