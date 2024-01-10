@@ -59,11 +59,12 @@
     .welcomemsg {
         position: absolute; /* Positions the message absolutely within right-container */
         top: 10%; /* Adjust as necessary */
-        left: 34%; /* Adjust as necessary */
+        left: 496px; /* Adjust as necessary */
         transform: translate(-50%, -50%); /* Centers the message */
         z-index: 3; /* Ensures it's above the login form */
         color: white; /* Example text color */
         text-align: left; /* Centers the text */
+        font-size: 24px;
     }
 
     .login-container {
@@ -207,7 +208,7 @@
         color: white;
     }
 
-        .right-container-vis::after {
+    .right-container-vis::after {
         content: "";
         position: absolute;
         top: 0;
@@ -251,7 +252,7 @@
     .grey-box-inf {
         position: absolute; /* Positioning relative to the right-container */
         left: 823Px; /* Adjust as needed, distance from the right edge of right-container */
-        top: 359px; /* Center vertically */
+        top: 350px; /* Center vertically */
         transform: translateY(-50%); /* Adjust vertical centering */
         width: 600px; /* Width of the grey box */
         height: 374px; /* Height of the grey box */
@@ -259,17 +260,16 @@
         border-radius: 10px; /* Optional, for rounded corners */
         z-index: 2; /* Ensures it's above the background but below the welcome message */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional, for a subtle shadow */
-        background-image: url("../build/images/Eyepriv.png");
-        background-size: 200px auto;
-        background-repeat: no-repeat;
-        background-position: top 120px left 200px;
         transition: 0.5s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
     }
 
     .red-box-inf {
         position: absolute; /* Positioning relative to the right-container */
         left: 146px; /* Adjust as needed, distance from the right edge of right-container */
-        top: 359px; /* Center vertically */
+        top: 350px; /* Center vertically */
         transform: translateY(-50%); /* Adjust vertical centering */
         width: 600px; /* Width of the grey box */
         height: 374px; /* Height of the grey box */
@@ -280,26 +280,80 @@
         background-image: url("../build/images/Folder.png");
         background-size: 200px auto;
         background-repeat: no-repeat;
-        background-position: top 120px left 200px;
+        background-position: center;
         transition: 0.5s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
     }
 
-    .bottom-box-inf {
+    .subdiv p{
+        font-size: 20px;
+        margin-left: 30px;
+        line-height: 0.5;
+    }
+
+    .bottom-box-inf{
         position: absolute; /* Positioning relative to the right-container */
-        left: 823Px; /* Adjust as needed, distance from the right edge of right-container */
-        top: 50%; /* Center vertically */
+        left: 146Px; /* Adjust as needed, distance from the right edge of right-container */
+        top: 730px; /* Center vertically */
         transform: translateY(-50%); /* Adjust vertical centering */
-        width: 600px; /* Width of the grey box */
-        height: 600px; /* Height of the grey box */
+        width: 1277px; /* Width of the grey box */
+        height: 250px; /* Height of the grey box */
         background-color: rgba(31, 32, 31, 1); /* Grey background */
         border-radius: 10px; /* Optional, for rounded corners */
         z-index: 2; /* Ensures it's above the background but below the welcome message */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional, for a subtle shadow */
-        background-image: url("../build/images/Eyepriv.png");
-        background-size: 200px auto;
+        background-image: url("../build/images/Delete.png");
+        background-size: 170px auto;
         background-repeat: no-repeat;
-        background-position: top 120px left 200px;
+        background-position: center;
         transition: 0.5s;
+        text-align: center;
+        display: flex;
+        align-items: center; /* Aligns children (h1) vertically */
+        justify-content: center; /* Aligns children (h1) horizontally */
+        flex-direction: column;
+    }
+    
+    .bottom-box-inf tex{
+        color: white;
+        font-size: 40px;
+
+    }
+
+    .bottom-box-inf:hover {
+        position: absolute; /* Positioning relative to the right-container */
+        left: 146Px; /* Adjust as needed, distance from the right edge of right-container */
+        top: 730px; /* Center vertically */
+        transform: translateY(-50%); /* Adjust vertical centering */
+        width: 1277px; /* Width of the grey box */
+        height: 250px; /* Height of the grey box */
+        background-color: rgba(139, 19, 15, 0.3);  /* Grey background */
+        border-radius: 10px; /* Optional, for rounded corners */
+        z-index: 2; /* Ensures it's above the background but below the welcome message */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional, for a subtle shadow */
+        background-image: url("../build/images/Delete.png");
+        background-size: 170px auto;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: 0.5s;
+        text-align: center;
+    }
+
+    .subdiv button {
+        width: 113px;
+        padding-top: 20px;
+        padding: 10px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 20px;
+        background-color: #c0392b;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        margin-left: 30px;
+        line-height: 0.5;
     }
 
     .right-container-inf {
@@ -309,10 +363,6 @@
         align-items: center;
         padding-left: 100px; /* Adds padding on the left */
         width: 1570px;
-        background-image: url("../build/images/tiltlogo.png");
-        background-size: 50% auto;
-        background-repeat: no-repeat;
-        background-position: center;
         background-color: #1a1a1a;
         border-radius: 50px 0 0 50px;
         position: relative;
@@ -320,7 +370,7 @@
 
     .right-container-inf p{
         color: white;
-        font-size: 24px;
+        font-size: 22px;
         left: 146px;
     }
 
@@ -334,4 +384,10 @@
         background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
         z-index: 1; /* Ensures the overlay is above the background image */
         border-radius: 50px 0 0 50px; /* Match the border radius of the container */
+    }
+
+    .right-container-inf h1{
+        font-size: 24px;
+        left: 146px;
+        color: white;
     }

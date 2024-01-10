@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TILT · Visibilité{% endblock %}
+{% block title %}TILT · Informations{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 {% endblock %}
@@ -15,8 +15,18 @@
     <div class="right-container-inf">
 
         <div class="grey-box-inf">
-            <h1>Privé</h1>
-            <p>Je souahite que mon profil <span>soit privé</span> et que les autres joueurs <span>ne puissent pas</span> le consulter</p>
+            <div class="subdiv">
+                <p><b>Changer votre pseudo</b></p>
+            </div>
+
+            <div class="subdiv">
+                <p><b>Nouveau pseudo</b></p>
+                <p>{Entrer pseudo}</p>
+            </div>
+
+            <div class="subdiv">
+            <button id="button">Connexion</button>
+            </div>
         </div>
 
         <div class="welcomemsg">
@@ -24,12 +34,24 @@
         </div>
 
         <div class="red-box-inf">
-            <h1>Public</h1>
-            <p>Je souahite que mon profil <span>soit public</span> et que les autres joueurs <span>puissent</span> le consulter</p>
+            <div class="subdiv">
+                <p><b>Pseudo actuel</b></p>
+                <p>{pseudo}</p>
+            </div>
+
+            <div class="subdiv">
+                <p><b>Date d'inscription</b></p>
+                <p>{JJ/MM/AAAA}</p>
+            </div>
+
+            <div class="subdiv">
+                <p><b>Visibilité</b></p>
+                <p>{Public}</p>
+            </div>
         </div>
 
-        <div class="red-box-inf">
-
+        <div class="bottom-box-inf">
+            <tex>Supprimer mon compte</tex>
         </div>
 
     </div>
