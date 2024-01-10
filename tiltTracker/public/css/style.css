@@ -40,6 +40,8 @@
 
     .right-container p{
         color: white;
+        font-size: 24px;
+        left: 146px;
     }
 
         .right-container::after {
@@ -100,8 +102,236 @@
         transform: translateY(-50%); /* Adjust vertical centering */
         width: 600px; /* Width of the grey box */
         height: 600px; /* Height of the grey box */
-        background-color: #1f201f; /* Grey background */
+        background-color: rgba(31, 32, 31, 1);/* Grey background */
         border-radius: 10px; /* Optional, for rounded corners */
         z-index: 2; /* Ensures it's above the background but below the welcome message */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional, for a subtle shadow */
+    }
+
+    .grey-box-vis {
+        position: absolute; /* Positioning relative to the right-container */
+        left: 823Px; /* Adjust as needed, distance from the right edge of right-container */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%); /* Adjust vertical centering */
+        width: 600px; /* Width of the grey box */
+        height: 600px; /* Height of the grey box */
+        background-color: rgba(31, 32, 31, 1); /* Grey background */
+        border-radius: 10px; /* Optional, for rounded corners */
+        z-index: 2; /* Ensures it's above the background but below the welcome message */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional, for a subtle shadow */
+        background-image: url("../build/images/Eyepriv.png");
+        background-size: 200px auto;
+        background-repeat: no-repeat;
+        background-position: top 120px left 200px;
+        transition: 0.5s;
+        cursor: pointer;
+    }
+
+    .grey-box-vis:hover {
+        position: absolute; /* Positioning relative to the right-container */
+        left: 823Px; /* Adjust as needed, distance from the right edge of right-container */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%); /* Adjust vertical centering */
+        width: 600px; /* Width of the grey box */
+        height: 600px; /* Height of the grey box */
+        background-color: rgb(60, 61, 60); /* Grey background */
+        border-radius: 10px; /* Optional, for rounded corners */
+        z-index: 2; /* Ensures it's above the background but below the welcome message */
+        background-color: rgba(139, 19, 15, 0.3);  /* Optional, for a subtle shadow */
+        background-image: url("../build/images/Eyepriv.png");
+        background-size: 220px auto;
+        background-repeat: no-repeat;
+        background-position: top 110px left 190px;
+        transition: 0.5s;
+    }
+
+    .red-box-vis {
+        position: absolute; /* Positioning relative to the right-container */
+        left: 146px; /* Adjust as needed, distance from the right edge of right-container */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%); /* Adjust vertical centering */
+        width: 600px; /* Width of the grey box */
+        height: 600px; /* Height of the grey box */
+        background-color: rgba(31, 32, 31, 1); /* Grey background */
+        border-radius: 10px; /* Optional, for rounded corners */
+        z-index: 2; /* Ensures it's above the background but below the welcome message */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional, for a subtle shadow */
+        background-image: url("../build/images/Eyepub.png");
+        background-size: 200px auto;
+        background-repeat: no-repeat;
+        background-position: top 120px left 200px;
+        transition: 0.5s;
+        cursor: pointer;
+    }
+
+    .red-box-vis:hover {
+        position: absolute; /* Positioning relative to the right-container */
+        left: 146px; /* Adjust as needed, distance from the right edge of right-container */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%); /* Adjust vertical centering */
+        width: 600px; /* Width of the grey box */
+        height: 600px; /* Height of the grey box */
+        background-color: rgba(139, 19, 15, 0.3);  /* Grey background */
+        border-radius: 10px; /* Optional, for rounded corners */
+        z-index: 2; /* Ensures it's above the background but below the welcome message */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional, for a subtle shadow */
+        background-image: url("../build/images/Eyepub.png");
+        background-size: 220px auto;
+        background-repeat: no-repeat;
+        background-position: top 110px left 190px;
+        transition: 0.5s;
+    }
+
+    .right-container-vis {
+        flex: 1;
+        display: flex;
+        justify-content: flex-start; /* Aligns children to the left */
+        align-items: center;
+        padding-left: 100px; /* Adds padding on the left */
+        width: 1570px;
+        background-size: 50% auto;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: #1a1a1a;
+        border-radius: 50px 0 0 50px;
+        position: relative;
+    }
+
+    .right-container-vis p{
+        color: white;
+    }
+
+    .right-container-vis h1{
+        font-size: 24px;
+        left: 146px;
+        color: white;
+    }
+
+        .right-container-vis::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+        z-index: 1; /* Ensures the overlay is above the background image */
+        border-radius: 50px 0 0 50px; /* Match the border radius of the container */
+    }
+
+    .grey-box-vis, .red-box-vis {
+        display: flex;
+        align-items: center; /* Aligns children (h1) vertically */
+        justify-content: center; /* Aligns children (h1) horizontally */
+        flex-direction: column;
+        height: 600px; /* Adjust as needed */
+    }
+
+    .grey-box-vis h1, .red-box-vis h1 {
+        text-align: center;
+        margin: 0; /* Removes default margin to allow for flex centering */
+        font-size: 96px;
+    }
+
+    .grey-box-vis span, .red-box-vis span {
+        text-align: center;
+        margin: 0; /* Removes default margin to allow for flex centering */
+        font-size: 22px;
+        color: red;
+    } 
+
+    .grey-box-vis p, .red-box-vis p {
+        text-align: center;
+        margin: 0; /* Removes default margin to allow for flex centering */
+        font-size: 22px;
+        color: white;
+        width: 470px;
+    } 
+
+    .grey-box-inf {
+        position: absolute; /* Positioning relative to the right-container */
+        left: 823Px; /* Adjust as needed, distance from the right edge of right-container */
+        top: 359px; /* Center vertically */
+        transform: translateY(-50%); /* Adjust vertical centering */
+        width: 600px; /* Width of the grey box */
+        height: 374px; /* Height of the grey box */
+        background-color: rgba(31, 32, 31, 1); /* Grey background */
+        border-radius: 10px; /* Optional, for rounded corners */
+        z-index: 2; /* Ensures it's above the background but below the welcome message */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional, for a subtle shadow */
+        background-image: url("../build/images/Eyepriv.png");
+        background-size: 200px auto;
+        background-repeat: no-repeat;
+        background-position: top 120px left 200px;
+        transition: 0.5s;
+    }
+
+    .red-box-inf {
+        position: absolute; /* Positioning relative to the right-container */
+        left: 146px; /* Adjust as needed, distance from the right edge of right-container */
+        top: 359px; /* Center vertically */
+        transform: translateY(-50%); /* Adjust vertical centering */
+        width: 600px; /* Width of the grey box */
+        height: 374px; /* Height of the grey box */
+        background-color: rgba(31, 32, 31, 1); /* Grey background */
+        border-radius: 10px; /* Optional, for rounded corners */
+        z-index: 2; /* Ensures it's above the background but below the welcome message */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional, for a subtle shadow */
+        background-image: url("../build/images/Folder.png");
+        background-size: 200px auto;
+        background-repeat: no-repeat;
+        background-position: top 120px left 200px;
+        transition: 0.5s;
+    }
+
+    .bottom-box-inf {
+        position: absolute; /* Positioning relative to the right-container */
+        left: 823Px; /* Adjust as needed, distance from the right edge of right-container */
+        top: 50%; /* Center vertically */
+        transform: translateY(-50%); /* Adjust vertical centering */
+        width: 600px; /* Width of the grey box */
+        height: 600px; /* Height of the grey box */
+        background-color: rgba(31, 32, 31, 1); /* Grey background */
+        border-radius: 10px; /* Optional, for rounded corners */
+        z-index: 2; /* Ensures it's above the background but below the welcome message */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional, for a subtle shadow */
+        background-image: url("../build/images/Eyepriv.png");
+        background-size: 200px auto;
+        background-repeat: no-repeat;
+        background-position: top 120px left 200px;
+        transition: 0.5s;
+    }
+
+    .right-container-inf {
+        flex: 1;
+        display: flex;
+        justify-content: flex-start; /* Aligns children to the left */
+        align-items: center;
+        padding-left: 100px; /* Adds padding on the left */
+        width: 1570px;
+        background-image: url("../build/images/tiltlogo.png");
+        background-size: 50% auto;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: #1a1a1a;
+        border-radius: 50px 0 0 50px;
+        position: relative;
+    }
+
+    .right-container-inf p{
+        color: white;
+        font-size: 24px;
+        left: 146px;
+    }
+
+        .right-container-inf::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+        z-index: 1; /* Ensures the overlay is above the background image */
+        border-radius: 50px 0 0 50px; /* Match the border radius of the container */
     }
