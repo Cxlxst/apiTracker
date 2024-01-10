@@ -10,7 +10,8 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 #[ApiResource]
-#[ApiFilter(SearchFilter::class, properties: ['pseudo' => 'exact'])]
+#[ApiFilter(SearchFilter::class, properties: ['pseudo' => 'exact'])] // http://127.0.0.1:8080/api/userss?pseudo=Pseudo%201
+#[ApiFilter(SearchFilter::class, properties: ['pseudo' => 'exact', 'motDePasse' => 'exact'])] //http://127.0.0.1:8080/api/userss?pseudo=Pseudo%201&motDePasse=MotDePasse123
 
 
 class Users

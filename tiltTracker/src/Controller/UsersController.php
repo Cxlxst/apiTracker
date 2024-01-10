@@ -14,4 +14,11 @@ class UsersController extends AbstractController
     {
         return $this->render('users/index.html.twig');
     }
+
+
+    #[Route('/connexion', name: 'app_connexion')]
+    public function connexion(): Response
+    {
+        return $this->render('connexion/index.html.twig');
+    }
 }

@@ -8,7 +8,7 @@ var apiOption = scriptTag.getAttribute('data-api-option').split(",");
 
 console.log(apiOption);
 
-if (apiOption[0] === 'getListe') { //Récupération de la liste de tous les joueurs
+if (apiOption[0] === 'getListe') { //Récupération de la liste de tous les joueurs --- apiOption : [0]:type de vérification
 
 
   console.log("Affichage de la liste des joueurs")
@@ -31,7 +31,7 @@ if (apiOption[0] === 'getListe') { //Récupération de la liste de tous les joue
 
    
 }
-else if (apiOption[0] === 'getSpecificAccount') //Récupération d'une fiche joueurs
+else if (apiOption[0] === 'getSpecificAccount') //Récupération d'une fiche user --- apiOption : [0]:type de vérification - [1]: idUser
 {
 
   console.log("Affichage d'une fiche utilisateur")
@@ -54,7 +54,7 @@ else if (apiOption[0] === 'getSpecificAccount') //Récupération d'une fiche jou
   });
 
 }
-else if (apiOption[0] === 'updateStatut') {
+else if (apiOption[0] === 'updateStatut') { //Changement du statut d'un user --- apiOption : [0]:type de vérification - [1]: idUser - [2]: statut actuel du user
 
   console.log("Mise à jour du statut de la fiche")
   var apiData;
@@ -95,6 +95,37 @@ else if (apiOption[0] === 'updateStatut') {
     .catch(error => {
       console.error('Erreur lors de la requête:', error);
     });
+
+}
+else if (apiOption[0] === 'verificationConnexion') { // système de vérirification des identifiant de connexion d'un user --- apiOption : [0]:type de vérification - [1]: pseudo - [2]: motDePasse 
+
+
+  console.log("Mise à jour du statut de la fiche")
+  var apiData;
+  var newStatut;
+
+  var pseudo = apiOption[1];
+  let pseudoModifie = pseudo.replace(/ /g, "%20");
+  var motDePasse = apiOption[2];
+
+  console.log("pseudoModifie : " + pseudoModifie + "motDePasse : " + motDePasse)
+
+
+  fetch("http://127.0.0.1:8080/api/userss?pseudo="+pseudoModifie+"&motDePasse="+motDePasse)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('La requête a échoué.');
+    }
+    return response.json();
+  })
+  .then(data => {
+    apiData = data
+    gestionEtatConnexion(apiData); //Dès que les données sont récupérées, elles sont renvoyé à la page principale
+  })
+  .catch(error => {
+    console.error('Erreur lors de la requête:', error);
+  });
+  
 
 }
 else

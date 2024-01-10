@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UsersController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+</style>
+
+    <h1>Page connexion</h1>
+
+    {# Cette requête permet de faire appel à une fonction par appuisur un boutton #}
+    <div class="connexion">
+
+        <input type="text" id="inputPseudo"/>
+        <input type="text" id="inputMotDePasse"/>
+
+        <button id="executeApiButton">Connexion</button>
+
+    </div>
+
+    
+    <script type="text/javascript">
+
+        //Permet de vérifier si un joueur est autorisé à se connecter grace au pseudo et au mot de passe qu'il saisie
+        function verificationDesIdentifiantsConnexion(pseudo,motDePasse){
+            const script = document.createElement('script');
+            script.src = "{{ asset('js/appelApi.js') }}";
+            script.setAttribute('data-api-option', 'verificationConnexion,'+ pseudo +','+ motDePasse);
+
+            document.body.appendChild(script);
+
+            script.onload = function () {
+                document.body.removeChild(script);
+            };
+        }
+
+
+        //Récupère l'évènement lorsqu'un user clique sur le boutton
+        document.getElementById('executeApiButton').addEventListener('click', function () {
+            var pseudo = document.getElementById('inputPseudo').value;
+            var motDePasse = document.getElementById('inputMotDePasse').value;
+
+            verificationDesIdentifiantsConnexion(pseudo, motDePasse);
+        });
+
+
+        //Gère le statut de connexion du user
+        function gestionEtatConnexion(data) {
+
+            console.log(data)
+
+            if(apiData['hydra:totalItems'] !=0)
+            {
+                console.log("Connexion autorisé")
+                var idUser = apiData['hydra:member'][0]['id']
+                console.log(idUser)
+            }
+            else
+            {
+                console.log("Connexion refusé")
+            }
+        }
+
+
+    </script>
+
+
+
+{% endblock %}
