@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UsersController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+</style>
+
+    {# <h1>Recherche</h1> #}
+    {# Cette requête permet de faire appel à une fonction par appui sur un boutton #}
+    {# <div class="connexion">
+
+        <input type="text" id="recherche"/>
+        <button id="executeApiButton">Rechercher un user</button>
+
+    </div> #}
+
+    <div class="example-wrapper">
+        <h2>Liste de nos joueurs</h2>
+        <div id="divListeJoueur"></div>
+        <script src="{{ asset('js/appelApi.js') }}" data-api-option="getListe"></script>
+    </div>
+
+
+
+    
+    <script type="text/javascript">
+
+
+        //Cette requête est appelé au moment ou la liste des utilisateurs est récupérer par l'appel api, elle affiche ensuite un tableau
+        function miseEnPlaceListeJoueur(data) {
+            var table = document.createElement('table');
+            table.border = '1';
+
+            var thead = document.createElement('thead');
+            var headerRow = thead.insertRow();
+            Object.keys(data[0]).forEach(function(key) {
+                var th = document.createElement('th');
+                th.appendChild(document.createTextNode(key));
+                headerRow.appendChild(th);
+            });
+            table.appendChild(thead);
+
+            var tbody = document.createElement('tbody');
+            data.forEach(function(item) {
+
+                var row = tbody.insertRow();
+                Object.values(item).forEach(function(value) {
+                    var cell = row.insertCell();
+                    cell.appendChild(document.createTextNode(value));
+                });
+
+                // Ajout du bouton pour consulter le profil
+                var cellButton = row.insertCell();
+                var button = document.createElement('button');
+                button.innerHTML = 'voir le profil';
+                button.addEventListener('click', function() {
+                 window.location.href = '{{ path("app_users") }}?id=' + item.id;
+                });
+                cellButton.appendChild(button); 
+
+            });
+
+            table.appendChild(tbody);
+
+            document.getElementById('divListeJoueur').appendChild(table);
+        }
+
+
+
+
+
+/*
+        function rechercheUser(recherche){
+            const script = document.createElement('script');
+            script.src = "{{ asset('js/appelApi.js') }}";
+            script.setAttribute('data-api-option', 'rechercheUser,'+ recherche);
+
+            document.body.appendChild(script);
+
+            script.onload = function () {
+                document.body.removeChild(script);
+            };
+        }
+
+
+        //Récupère l'évènement lorsqu'un user clique sur le boutton
+        document.getElementById('executeApiButton').addEventListener('click', function () {
+            var recherche = document.getElementById('recherche').value;
+
+            rechercheUser(recherche);
+        });
+
+
+        //Gère le statut de connexion du user
+        function resultatRechercheGenerale(data) {
+
+            console.log(data)
+
+            if(apiData['hydra:totalItems'] !=0)
+            {
+                console.log("Utilisateur trouvé")
+                console.log(apiData['hydra:member'])
+            }
+            else
+            {
+                console.log("Aucun utilisateur trouvé")
+            }
+        }
+*/
+
+    </script>
+
+
+
+{% endblock %}

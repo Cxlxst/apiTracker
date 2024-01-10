@@ -100,7 +100,7 @@ else if (apiOption[0] === 'updateStatut') { //Changement du statut d'un user ---
 else if (apiOption[0] === 'verificationConnexion') { // système de vérirification des identifiant de connexion d'un user --- apiOption : [0]:type de vérification - [1]: pseudo - [2]: motDePasse 
 
 
-  console.log("Mise à jour du statut de la fiche")
+  console.log("Vérification de la connexion")
   var apiData;
   var newStatut;
 
@@ -125,6 +125,36 @@ else if (apiOption[0] === 'verificationConnexion') { // système de véririficat
   .catch(error => {
     console.error('Erreur lors de la requête:', error);
   });
+  
+
+}
+else if (apiOption[0] === 'rechercheUser') { // système de recherche de user --- apiOption : [0]:type de vérification - [1]: recherche
+
+
+  console.log("Recherche utilisateur - Désactivé")
+  // var apiData;
+  // var newStatut;
+
+  // var recherche = apiOption[1];
+  // // var rechercheModifie = recherche.replace(/ /g, "%20");
+
+
+  // console.log("http://127.0.0.1:8080/api/userss?pseudo="+recherche)
+
+  // fetch("http://127.0.0.1:8080/api/userss?pseudo="+recherche )
+  // .then(response => {
+  //   if (!response.ok) {
+  //     throw new Error('La requête a échoué.');
+  //   }
+  //   return response.json();
+  // })
+  // .then(data => {
+  //   apiData = data
+  //   resultatRechercheGenerale(apiData); //Dès que les données sont récupérées, elles sont renvoyé à la page principale
+  // })
+  // .catch(error => {
+  //   console.error('Erreur lors de la requête:', error);
+  // });
   
 
 }
