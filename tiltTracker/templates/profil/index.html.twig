@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TILT · Profil{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+{% endblock %}
+{% block body %}
+
+<div class="split-container">
+    <div class="left-container-classic">
+        <div class="nav-bar">
+            <div class="nav-bar-account">
+                <p>Compte</p>
+                <button class="selected"><img src="../build/images/user.png">Profil</button>
+                <button class="native"><img src="../build/images/match.png">Matchs</button>
+                <button class="native"><img src="../build/images/search.png">Recherche</button>
+            </div>
+            <div class="nav-bar-parameters">
+                <p>Paramètres</p>
+                <button class="native"><img src="../build/images/infos.png">Informations</button>
+                <button class="native"><img src="../build/images/visibility.png">Visibilité</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="right-container-classic">
+        <div class="welcomemsg">
+            <h1>Bienvenue dataPseudoJoueur, prêt.e pour une partie ?</h1>
+        </div>
+            <div class="box-600-x-600">
+                <h2>Niveau 20</h2>
+            </div>
+            
+        <div class="box-container">
+            <div class="box-550-x-150">
+                dataPseudoUser
+                Inscrit.e depuis le dataDataInscription
+            </div>
+
+            <div class="box-550-x-150">
+                Votre compte est dataVisibilite de tous
+            </div>
+
+            <div class="box-550-x-150">
+                Vous avez joué dataMatch matchs au total
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+</script>
+
+{% endblock %}
