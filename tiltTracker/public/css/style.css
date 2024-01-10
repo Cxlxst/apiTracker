@@ -38,6 +38,10 @@
         position: relative;
     }
 
+    .right-container p{
+        color: white;
+    }
+
         .right-container::after {
         content: "";
         position: absolute;
