@@ -5,9 +5,14 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\UsersRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 #[ApiResource]
+#[ApiFilter(SearchFilter::class, properties: ['pseudo' => 'exact'])]
+
+
 class Users
 {
     #[ORM\Id]
@@ -17,6 +22,9 @@ class Users
 
     #[ORM\Column(length: 255)]
     private ?string $pseudo = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $motDePasse = null;
 
     #[ORM\Column]
     private ?int $nb_match = null;
@@ -69,6 +77,17 @@ class Users
         return $this;
     }
 
+    public function getmdp(): ?string
+    {
+        return $this->motDePasse;
+    }
+
+    public function setMdp(string $mdp): static
+    {
+        $this->motDePasse = $mdp;
+
+        return $this;
+    }
 
 
     public function getMatchUser(): ?MatchUser
