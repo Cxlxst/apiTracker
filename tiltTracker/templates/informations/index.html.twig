@@ -2,14 +2,26 @@
 
 {% block title %}TILT · Informations{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/stylech.css') }}">
 {% endblock %}
 {% block body %}
 
 <div class="split-container">
     
-    <div class="left-container">
-    
+    <div class="left-container-classic">
+    <div class="nav-bar">
+            <div class="nav-bar-account">
+                <p>Compte</p>
+                <button class="native"><img src="../build/images/user.png">Profil</button>
+                <button class="native"><img src="../build/images/match.png">Matchs</button>
+                <button class="native"><img src="../build/images/search.png">Recherche</button>
+            </div>
+            <div class="nav-bar-parameters">
+                <p>Paramètres</p>
+                <button class="selected"><img src="../build/images/infos.png">Informations</button>
+                <button class="native"><img src="../build/images/visibility.png">Visibilité</button>
+            </div>
+        </div>
     </div>
 
     <div class="right-container-inf">
@@ -21,16 +33,15 @@
 
             <div class="subdiv">
                 <p><b>Nouveau pseudo</b></p>
-                <p>{Entrer pseudo}</p>
+                <input type="pseudo" id="pseudo" placeholder="pseudo" />
             </div>
-
             <div class="subdiv">
-            <button id="button">Connexion</button>
+            <button id="button">Modifier</button>
             </div>
         </div>
 
         <div class="welcomemsg">
-            <h1>Choisissez si vous souhaitez que votre profil soit public ou non</h1>
+            <h1>Ici vous trouverez toutes vos informations personnelles</h1>
         </div>
 
         <div class="red-box-inf">
@@ -51,7 +62,7 @@
         </div>
 
         <div class="bottom-box-inf">
-            <tex>Supprimer mon compte</tex>
+            <tex><b>Supprimer mon compte</b></tex>
         </div>
 
     </div>
