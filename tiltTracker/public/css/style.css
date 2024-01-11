@@ -1,107 +1,247 @@
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background-color: #333;
-        overflow: hidden;
-    }
-    .split-container {
-        display: flex;
-        height: 100%;
-        flex-wrap: nowrap;
-    }
-    .left-container {
-        flex: 0 0 350px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-image: url("../build/images/logo.png");
-        background-size: 50% auto;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-color: #333;
-    }
-    .right-container {
-        flex: 1;
-        display: flex;
-        justify-content: flex-start; /* Aligns children to the left */
-        align-items: center;
-        padding-left: 100px; /* Adds padding on the left */
-        width: 1570px;
-        background-image: url("../build/images/tiltlogo.png");
-        background-size: 50% auto;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-color: #1a1a1a;
-        border-radius: 50px 0 0 50px;
-        position: relative;
-    }
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #FFFFFF;
+    background-color: #333;
+    overflow: hidden;
+}
 
-    .right-container p{
-        color: white;
-    }
+h2{
+    font-weight: 100;
+}
 
-        .right-container::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-        z-index: 1; /* Ensures the overlay is above the background image */
-        border-radius: 50px 0 0 50px; /* Match the border radius of the container */
-    }
+.split-container {
+    display: flex;
+    height: 100%;
+    flex-wrap: nowrap;
+}
 
-    .welcomemsg {
-        position: absolute; /* Positions the message absolutely within right-container */
-        top: 10%; /* Adjust as necessary */
-        left: 34%; /* Adjust as necessary */
-        transform: translate(-50%, -50%); /* Centers the message */
-        z-index: 3; /* Ensures it's above the login form */
-        color: white; /* Example text color */
-        text-align: left; /* Centers the text */
-    }
+.left-container {
+    flex: 0 0 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../build/images/logo.png");
+    background-size: 60% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #333;
+}
 
-    .login-container {
-        text-align: left;
-        max-width: 400px;
-        width: 100%;
-        padding: 20px;
-        border-radius: 10px;
-        position: relative; /* Make sure it's above the pseudo-element */
-        z-index: 2;
-    }
-    .login-container input {
-        width: 80%;
-        margin-bottom: 15px;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-    }
-    .login-container button {
-        width: 50%;
-        padding-top: 20px;
-        padding: 10px;
-        margin-top: 10px;
-        border: none;
-        border-radius: 20px;
-        background-color: #c0392b;
-        color: white;
-        cursor: pointer;
-        font-size: 1em;
-    }
+.left-container-classic {
+    flex: 0 0 350px;
+    display: flex;
+    align-items: center;
+    background-image: url("../build/images/logo.png");
+    background-size: 60% auto;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-color: #333;
+}
 
-    .grey-box {
-        position: absolute; /* Positioning relative to the right-container */
-        right: 80px; /* Adjust as needed, distance from the right edge of right-container */
-        top: 50%; /* Center vertically */
-        transform: translateY(-50%); /* Adjust vertical centering */
-        width: 600px; /* Width of the grey box */
-        height: 600px; /* Height of the grey box */
-        background-color: #1f201f; /* Grey background */
-        border-radius: 10px; /* Optional, for rounded corners */
-        z-index: 2; /* Ensures it's above the background but below the welcome message */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional, for a subtle shadow */
-    }
+.left-container-classic p{
+    font-size: 24px; 
+}
+
+.left-container-classic img{
+    width: 17px;
+    margin-right: 15px;
+}
+
+.nav-bar{
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+}
+
+.nav-bar-account{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+.nav-bar-parameters{
+    display: flex;
+    flex-direction: column;
+}
+
+.native{
+    width: max-content;
+    font-size: 20px;
+    text-align: left;
+    padding: 10px 30px 10px 15px;
+    margin-bottom: 7px;
+    border-style: none;
+    background-color: #333;
+    color: #FFFFFF;
+}
+
+.native:hover{
+    width: max-content;
+    font-size: 20px;
+    text-align: left;
+    padding: 10px 30px 10px 15px;
+    margin-bottom: 7px;
+    border-style: none;
+    border-radius: 20px;
+    background-color: #6A1613;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.selected{
+    width: max-content;
+    font-size: 20px;
+    text-align: left;
+    padding: 10px 30px 10px 15px;
+    margin-bottom: 7px;
+    border-style: none;
+    border-radius: 20px;
+    background-color: #6A1613;
+    color: #FFFFFF;
+}
+
+.right-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start; /* Aligns children to the left */
+    align-items: center;
+    padding-left: 100px; /* Adds padding on the left */
+    width: 1570px;
+    background-image: url("../build/images/tiltlogo.png");
+    background-size: 50% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #1a1a1a;
+    border-radius: 50px 0 0 50px;
+    position: relative;
+}
+
+.right-container-classic {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start; /* Aligns children to the left */
+    align-items: center;
+    padding-left: 100px; /* Adds padding on the left */
+    width: 1570px;
+    background-color: #1a1a1a;
+    border-radius: 50px 0 0 50px;
+    position: relative;
+}
+
+.right-container p{
+    color: white;
+}
+
+.right-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 1; /* Ensures the overlay is above the background image */
+    border-radius: 50px 0 0 50px; /* Match the border radius of the container */
+}
+
+.welcomemsg {
+    position: absolute; /* Positions the message absolutely within right-container */
+    top: 10%; /* Adjust as necessary */
+    left: 100px; /* Adjust as necessary */
+    
+    z-index: 3; /* Ensures it's above the login form */
+    color: white; /* Example text color */
+    text-align: left; /* Centers the text */
+}
+
+.login-container {
+    text-align: left;
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative; /* Make sure it's above the pseudo-element */
+    z-index: 2;
+}
+.login-container input {
+    width: 80%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+.login-container button {
+    width: 50%;
+    padding-top: 20px;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #c0392b;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.box-container-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.box-container-line{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.box-container p{
+    font-size: 18px;
+}
+
+.flex-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 0px 100px 0px;
+}
+
+.box-600-x-600 {
+    position: absolute; /* Positioning relative to the right-container */
+    /* right: 80px; */
+    text-align: center;
+    width: 600px;
+    height: 600px;
+    background-color: #1f201f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box-550-x-150 {
+    display: flex;
+    align-items: center;
+    margin: 38px 0px 38px 450px;
+    text-align: center;
+    width: 550px;
+    height: 150px;
+    background-color: #1f201f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box-550-x-150 img{
+    width: 50px;
+    height: 50px;
+    margin: 0px 30px 0px 20px;
+}
+
+.stack-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.stack-column p{
+    margin: 0px;
+    text-align: left;
+}
