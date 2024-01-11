@@ -18,10 +18,11 @@
 
     {# <h1>Recherche</h1> #}
     {# Cette requête permet de faire appel à une fonction par appui sur un boutton #}
-    {# <div class="connexion">
+    <div class="connexion">
 
         <input type="text" id="recherche"/>
         <button id="executeApiButton">Rechercher un user</button>
+
 
     </div> #}
 <div class="split-container">
@@ -40,6 +41,7 @@
                 <button class="native"><img src="../build/images/visibility.png">Visibilité</button>
             </div>
         </div>
+
     </div>
 
     <div class="right-container-inf">
@@ -134,7 +136,7 @@ function miseEnPlaceListeJoueur(data) {
 
 
 
-/*
+
         function rechercheUser(recherche){
             const script = document.createElement('script');
             script.src = "{{ asset('js/appelApi.js') }}";
@@ -171,7 +173,7 @@ function miseEnPlaceListeJoueur(data) {
                 console.log("Aucun utilisateur trouvé")
             }
         }
-*/
+
 
     </script>
 

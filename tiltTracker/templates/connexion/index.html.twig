@@ -52,9 +52,12 @@
         console.log(data);
         if(apiData['hydra:totalItems'] != 0) {
             console.log("Connexion autorisé");
-            var idUser = apiData['hydra:member'][0]['id'];
-            console.log(idUser);
-window.location.href = '{{ path("app_users") }}?id=' + idUser; //Nom du chemin à modifier pour ce lié à celui de Céleste
+
+            var idUser = apiData['hydra:member'][0]['user'];
+            var idUserDecompose = idUser.split("/");
+
+            window.location.href = '{{ path("app_verificationConnexion") }}?id=' + idUserDecompose[3]; //Nom du chemin à modifier pour ce lié à celui de Céleste
+
         } else {
             console.log("Connexion refusé");
         }
