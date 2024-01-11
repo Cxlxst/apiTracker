@@ -221,7 +221,7 @@ else if (apiOption[0] === 'suppressionUser') {
 
   console.log("Supression d'un membre")
 
-  fetch("http://127.0.0.1:8080/api/userss/" + apiOption[1], {
+  fetch("http://127.0.0.1:8080/api/connexions/" + apiOption[2], {
     method: 'DELETE',
     headers: {
       'Accept': 'application/ld+json',
@@ -232,7 +232,7 @@ else if (apiOption[0] === 'suppressionUser') {
     if (!response.ok) {
       throw new Error('La requête a échoué.');
     }
-    console.log('Suppression réussie.');
+    console.log('Suppression accès connexion réussie.');
     window.location.href = "/connexion";
   })
   .catch(error => {

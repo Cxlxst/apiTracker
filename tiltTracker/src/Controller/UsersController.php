@@ -21,16 +21,19 @@ class UsersController extends AbstractController
     public function verificationConnexion(Request $request): Response
     {
         $idUser = $request->query->get('id');
+        $idUserBddConnexion = $request->query->get('idUserBddConnexion');
 
         if($idUser != 0)
         {
             $session = $request->getSession();
             $session->set('idConnexion', $idUser);
+            $session->set('idUserBddConnexion', $idUserBddConnexion);
         }
         else
         {
             $session = $request->getSession();
             $session->set('idConnexion', 0);
+            $session->set('idUserBddConnexion', 0);
         }
 
         

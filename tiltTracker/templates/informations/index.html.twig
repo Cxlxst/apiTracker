@@ -6,7 +6,9 @@
 {% endblock %}
 {% block body %}
 
-<input type="hidden" id="identifiantUser" value="{{ app.session.get('idConnexion') }}">
+<input type="text" id="identifiantUser" value="{{ app.session.get('idConnexion') }}">
+<input type="text" id="identifiantUserBddConnexion" value="{{ app.session.get('idUserBddConnexion') }}">
+
 {# <input type="text" id="statutActuelUser"> #}
 
 <div class="split-container">
@@ -118,15 +120,16 @@
     //Permet de détecter la suppression l'appui bouton pour la supression d'un joueur
     document.getElementById('buttonDeleteAccount').addEventListener('click', function () {
         var idUser = document.getElementById('identifiantUser').value;
+        var idUserBddConnexion = document.getElementById('identifiantUserBddConnexion').value;
         console.log(idUser)
-        supressionUser(idUser);
+        supressionUser(idUser, idUserBddConnexion);
     }); 
 
     //Déclenchement de la supression d'un joueur avec lancement du script
-    function supressionUser(idUser){
+    function supressionUser(idUser, idUserBddConnexion){
         const script = document.createElement('script');
         script.src = "{{ asset('js/appelApi.js') }}";
-        script.setAttribute('data-api-option', 'suppressionUser,'+ idUser);
+        script.setAttribute('data-api-option', 'suppressionUser,'+ idUser+","+idUserBddConnexion);
 
         document.body.appendChild(script);
 
