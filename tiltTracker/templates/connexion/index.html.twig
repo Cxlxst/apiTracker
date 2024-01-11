@@ -2,7 +2,7 @@
 
 {% block title %}Hello UsersController!{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/stylech.css') }}">
 {% endblock %}
 {% block body %}
 
@@ -50,7 +50,7 @@
             console.log("Connexion autorisé");
             var idUser = apiData['hydra:member'][0]['id'];
             console.log(idUser);
-            window.location.href = '{{ path("app_users") }}?id=' + idUser; //Nom du chemin à modifier pour ce lié à celui de Céleste
+            window.location.href = '{{ path("app_verificationConnexion") }}?id=' + idUser; //Nom du chemin à modifier pour ce lié à celui de Céleste
         } else {
             console.log("Connexion refusé");
         }
