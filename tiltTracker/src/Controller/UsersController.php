@@ -37,7 +37,17 @@ class UsersController extends AbstractController
         }
 
         
-        return $this->render('visibilite/index.html.twig');
+        return $this->render('profil/index.html.twig');
+    }
+
+
+    #[Route('/deconnexionUser', name: 'app_deconnexionUser')]
+    public function deconnexionUser(Request $request): Response
+    {
+        $session = $request->getSession();
+        $session->set('idConnexion', 0);
+        $session->set('idUserBddConnexion', 0);
+        return $this->render('connexion/index.html.twig');
     }
 
     #[Route('/connexion', name: 'app_connexion')]
@@ -64,7 +74,7 @@ class UsersController extends AbstractController
         return $this->render('informations/index.html.twig');
     }
 
-    #[Route('/newuser', name: 'newuser')]
+    #[Route('/newuser', name: 'app_newuser')]
     public function newuser(): Response
     {
         return $this->render('newuser/index.html.twig');
@@ -80,5 +90,11 @@ class UsersController extends AbstractController
     public function matchUser(): Response
     {
         return $this->render('match/index.html.twig');
+    }
+
+    #[Route('/redirectionRecherche', name: 'app_redirectionRecherche')]
+    public function redirectionUser(): Response
+    {
+        return $this->render('recherche/index.html.twig');
     }
 }

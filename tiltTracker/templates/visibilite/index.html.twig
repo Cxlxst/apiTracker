@@ -15,8 +15,12 @@
         <div class="nav-bar">
             <div class="nav-bar-account">
                 <p>Compte</p>
-                <button class="native"><img src="../build/images/user.png">Profil</button>
-                <button class="native"><img src="../build/images/match.png">Matchs</button>
+                <a href="{{ path("app_profil") }}">
+                    <button class="native"><img src="../build/images/user.png">Profil</button>
+                </a>
+                <a href="{{ path("app_match") }}">
+                    <button class="native"><img src="../build/images/match.png">Matchs</button>
+                </a>
                 <a href="{{ path("app_recherche") }}">
                     <button class="native"><img src="../build/images/search.png">Recherche</button>
                 </a>
@@ -29,7 +33,7 @@
                 <button class="selected"><img src="../build/images/visibility.png">Visibilité</button>
             </div>
             <div class="nav-bar-log-out">
-                <button class="native"><img src="../build/images/log_out.png">Déconnexion</button>
+                <button id="bouttonDeconnexion" class="native"><img src="../build/images/log_out.png">Déconnexion</button>
             </div>
         </div>
     </div>
@@ -53,9 +57,18 @@
 
 <script type="text/javascript">
 
+    
+
     //Récupération du statut en direct
     var identifiantUserValue = document.getElementById('identifiantUser').value;
 
+    //Gestion de la redirection si un dutilisateur n'est pas connecté
+    if(identifiantUserValue == 0)
+    {
+        window.location.href = '{{ path("app_redirectionRecherche") }}';
+    }
+
+    
     const script = document.createElement('script');
     script.src = "{{ asset('js/appelApi.js') }}";
     script.setAttribute('data-api-option', 'getSpecificStatutAccount,'+ identifiantUserValue);
@@ -66,6 +79,7 @@
         document.body.removeChild(script);
     };
 
+    
 
     //Affichage du statut en direct
 
@@ -79,7 +93,6 @@
             var valeurPublic = "Votre statut est public";
             elementTexte.textContent = valeurPublic;
             document.getElementById('statutActuelUser').value = "public"
-            document.getElementById("myBtn").disabled = true;
         }
         else
         {
@@ -87,7 +100,6 @@
             var valeurprive = "Votre statut est privé";
             elementTexte.textContent = valeurprive;
             document.getElementById('statutActuelUser').value = "privé"
-            document.getElementById("myBtn").disabled = true;
         }
 
     }
