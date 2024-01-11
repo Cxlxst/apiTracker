@@ -2,7 +2,7 @@
 
 {% block title %}TILT · Connexion{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/stylech.css') }}">
 {% endblock %}
 {% block body %}
 
@@ -10,8 +10,9 @@
     <div class="left-container">
     </div>
     <div class="right-container">
-        <div class="grey-box">
-            <!-- Content of the grey box goes here -->
+        <div id="recherche" class="grey-box-login">
+            <h1>Recherche</h1>
+            <p>Cet outil vous permet de rechercher n’importe quel profil de joueur référencé sur notre application</p>
         </div>
         <div class="welcomemsg">
             <h1>Bienvenue sur Tilt Tracker, que souhaitez vous faire?</h1>
@@ -21,7 +22,10 @@
             <input type="text" id="inputPseudo" placeholder="Pseudo" />
         <p>Mot de passe</p>
             <input type="password" id="inputMotDePasse" placeholder="Mot de passe" />
-            <button id="executeApiButton">Connexion</button>
+            <div class="sign-in">
+                <button id="executeApiButton">Connexion</button>
+                <a href= "faire lien vers la page de connexion"> Créer un compte</a> 
+            </div>
         </div>
     </div>
 </div>
@@ -48,12 +52,24 @@
         console.log(data);
         if(apiData['hydra:totalItems'] != 0) {
             console.log("Connexion autorisé");
-            var idUser = apiData['hydra:member'][0]['id'];
-            console.log(idUser);
+
+            var idUser = apiData['hydra:member'][0]['user'];
+            var idUserDecompose = idUser.split("/");
+
+            window.location.href = '{{ path("app_verificationConnexion") }}?id=' + idUserDecompose[3]; //Nom du chemin à modifier pour ce lié à celui de Céleste
+
         } else {
             console.log("Connexion refusé");
         }
     }
+
+
+    //Redirection vers la recherche
+    document.getElementById('recherche').addEventListener('click', function () {
+        window.location.href = '{{ path("app_recherche") }}';
+    });
+
+
 </script>
 
 {% endblock %}

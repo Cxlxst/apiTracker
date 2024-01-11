@@ -1,0 +1,161 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TILT · Informations{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/stylech.css') }}">
+{% endblock %}
+{% block body %}
+
+<input type="hidden" id="identifiantUser" value="{{ app.session.get('idConnexion') }}">
+{# <input type="text" id="statutActuelUser"> #}
+
+<div class="split-container">
+    
+    <div class="left-container-classic">
+    <div class="nav-bar">
+            <div class="nav-bar-account">
+                <p>Compte</p>
+                <button class="native"><img src="../build/images/user.png">Profil</button>
+                <button class="native"><img src="../build/images/match.png">Matchs</button>
+                <a href="{{ path("app_recherche") }}">
+                    <button class="native"><img src="../build/images/search.png">Recherche</button>
+                </a>
+            </div>
+            <div class="nav-bar-parameters">
+                <p>Paramètres</p>
+                <button class="selected"><img src="../build/images/infos.png">Informations</button>
+                <a href="{{ path("app_visibilite") }}">
+                    <button class="native"><img src="../build/images/visibility.png">Visibilité</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-container-inf">
+
+        <div class="grey-box-inf">
+            <div class="subdiv">
+                <p><b>Changer votre pseudo</b></p>
+            </div>
+
+            <div class="subdiv">
+                <p><b>Nouveau pseudo</b></p>
+                <input type="pseudo" id="pseudoUserActuel" placeholder="pseudo" />
+            </div>
+            <div class="subdiv">
+            <button id="buttonModifierPseudo">Modifier</button>
+            </div>
+        </div>
+
+        <div class="welcomemsg">
+            <h1>Ici vous trouverez toutes vos informations personnelles</h1>
+        </div>
+
+        <div class="red-box-inf">
+            <div class="subdiv">
+                <p><b>Pseudo actuel</b></p>
+                <p id="pseudo">...</p>
+            </div>
+
+            <div class="subdiv">
+                <p><b>Date d'inscription</b></p>
+                <p>{JJ/MM/AAAA}</p>
+            </div>
+
+            <div class="subdiv">
+                <p><b>Visibilité</b></p>
+                <p id="statutActuelElement">...</p>
+            </div>
+        </div>
+
+        <div id="buttonDeleteAccount" class="bottom-box-inf">
+            <tex><b>Supprimer mon compte</b></tex>
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+
+    //Récupération du statut en direct
+    var identifiantUserValue = document.getElementById('identifiantUser').value;
+
+    const script = document.createElement('script');
+    script.src = "{{ asset('js/appelApi.js') }}";
+    script.setAttribute('data-api-option', 'getSpecificStatutAccount,'+ identifiantUserValue);
+
+    document.body.appendChild(script);
+
+    script.onload = function () {
+        document.body.removeChild(script);
+    };
+
+
+
+    function miseEnPlaceStatutActuel(data) {
+
+        console.log(data.statut)
+        var statutActuel = data.statut
+        var pseudo = data.pseudo
+
+        var textStatutActuel = document.getElementById('statutActuelElement');
+        textStatutActuel.textContent = statutActuel;
+
+        var textPseudo = document.getElementById('pseudo');
+        textPseudo.textContent = pseudo;
+
+        var textPseudoInput = document.getElementById('pseudoUserActuel');
+        textPseudoInput.value = pseudo;
+        
+    }
+
+
+    //Permet de détecter la suppression l'appui bouton pour la supression d'un joueur
+    document.getElementById('buttonDeleteAccount').addEventListener('click', function () {
+        var idUser = document.getElementById('identifiantUser').value;
+        console.log(idUser)
+        supressionUser(idUser);
+    }); 
+
+    //Déclenchement de la supression d'un joueur avec lancement du script
+    function supressionUser(idUser){
+        const script = document.createElement('script');
+        script.src = "{{ asset('js/appelApi.js') }}";
+        script.setAttribute('data-api-option', 'suppressionUser,'+ idUser);
+
+        document.body.appendChild(script);
+
+        script.onload = function () {
+            document.body.removeChild(script);
+        };
+    }
+
+
+
+    document.getElementById('buttonModifierPseudo').addEventListener('click', function () {
+        var idUser = document.getElementById('identifiantUser').value;
+        var pseudoUser = document.getElementById('pseudoUserActuel').value;
+        console.log("pseudoUser: " + pseudoUser)
+        changementDuPseudoUser(idUser, pseudoUser);
+    }); 
+
+
+    //Permet d'inverser le statutDu profil (visible/masqué)
+    function changementDuPseudoUser(idFicheJoueur,pseudoUser){
+        const script = document.createElement('script');
+        script.src = "{{ asset('js/appelApi.js') }}";
+        script.setAttribute('data-api-option', 'updatePseudo,'+ idFicheJoueur +','+ pseudoUser);
+
+        document.body.appendChild(script);
+
+        script.onload = function () {
+            document.body.removeChild(script);
+        };
+    }
+
+
+</script>
+
+{% endblock %}

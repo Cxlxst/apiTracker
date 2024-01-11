@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TILT · Visibilité{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/stylech.css') }}">
+{% endblock %}
+{% block body %}
+
+<input type="hidden" id="identifiantUser" value="{{ app.session.get('idConnexion') }}">
+<input type="hidden" id="statutActuelUser">
+
+
+<div class="split-container">
+    <div class="left-container-classic">
+        <div class="nav-bar">
+            <div class="nav-bar-account">
+                <p>Compte</p>
+                <button class="native"><img src="../build/images/user.png">Profil</button>
+                <button class="native"><img src="../build/images/match.png">Matchs</button>
+                <a href="{{ path("app_recherche") }}">
+                    <button class="native"><img src="../build/images/search.png">Recherche</button>
+                </a>
+            </div>
+            <div class="nav-bar-parameters">
+                <p>Paramètres</p>
+                <a href="{{ path("app_infos") }}">
+                    <button class="native"><img src="../build/images/infos.png">Informations</button>
+                </a>
+                <button class="selected"><img src="../build/images/visibility.png">Visibilité</button>
+                
+            </div>
+        </div>
+    </div>
+    <div class="right-container-vis">
+        <div id="changementStatut1" class="grey-box-vis">
+            <h1>Privé</h1>
+            <p>Je souahite que mon profil <span>soit privé</span> et que les autres joueurs <span>ne puissent pas</span> le consulter</p>
+        </div>
+        <div class="welcomemsg">
+            <h1 id="messageStatutActuel">Chargement de votre statut en cours...</h1>
+        </div>
+        <div id="changementStatut2" class="red-box-vis">
+            <h1>Public</h1>
+            <p>Je souahite que mon profil <span>soit public</span> et que les autres joueurs <span>puissent</span> le consulter</p>
+        </div>
+    </div>
+</div>
+
+
+ 
+
+<script type="text/javascript">
+
+    //Récupération du statut en direct
+    var identifiantUserValue = document.getElementById('identifiantUser').value;
+
+    const script = document.createElement('script');
+    script.src = "{{ asset('js/appelApi.js') }}";
+    script.setAttribute('data-api-option', 'getSpecificStatutAccount,'+ identifiantUserValue);
+
+    document.body.appendChild(script);
+
+    script.onload = function () {
+        document.body.removeChild(script);
+    };
+
+
+    //Affichage du statut en direct
+
+    function miseEnPlaceStatutActuel(data) {
+
+        console.log(data.statut)
+        var stautActuel = data.statut
+        if(stautActuel == "public")
+        {
+            var elementTexte = document.getElementById('messageStatutActuel');
+            var valeurPublic = "Votre statut est public";
+            elementTexte.textContent = valeurPublic;
+            document.getElementById('statutActuelUser').value = "public"
+            document.getElementById("myBtn").disabled = true;
+        }
+        else
+        {
+            var elementTexte = document.getElementById('messageStatutActuel');
+            var valeurprive = "Votre statut est privé";
+            elementTexte.textContent = valeurprive;
+            document.getElementById('statutActuelUser').value = "privé"
+            document.getElementById("myBtn").disabled = true;
+        }
+
+    }
+
+
+    document.getElementById('changementStatut1').addEventListener('click', function () {
+        var idUser = document.getElementById('identifiantUser').value;
+        var statutUser = document.getElementById('statutActuelUser').value;
+        changementDuStatutDuProfil(idUser, statutUser);
+    }); 
+
+    document.getElementById('changementStatut2').addEventListener('click', function () {
+        var idUser = document.getElementById('identifiantUser').value;
+        var statutUser = document.getElementById('statutActuelUser').value;
+        changementDuStatutDuProfil(idUser, statutUser);
+    }); 
+
+
+
+    //Permet d'inverser le statutDu profil (visible/masqué)
+    function changementDuStatutDuProfil(idFicheJoueur,statutActuelFiche){
+        const script = document.createElement('script');
+        script.src = "{{ asset('js/appelApi.js') }}";
+        script.setAttribute('data-api-option', 'updateStatut,'+ idFicheJoueur +','+ statutActuelFiche);
+
+        document.body.appendChild(script);
+
+        script.onload = function () {
+            document.body.removeChild(script);
+        };
+    }
+    
+
+
+
+
+</script>
+
+
+
+{% endblock %}

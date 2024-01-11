@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,6 +16,26 @@ class UsersController extends AbstractController
         return $this->render('users/index.html.twig');
     }
 
+    //Moment de la première connexion
+    #[Route('/verificationConnexion', name: 'app_verificationConnexion')]
+    public function verificationConnexion(Request $request): Response
+    {
+        $idUser = $request->query->get('id');
+
+        if($idUser != 0)
+        {
+            $session = $request->getSession();
+            $session->set('idConnexion', $idUser);
+        }
+        else
+        {
+            $session = $request->getSession();
+            $session->set('idConnexion', 0);
+        }
+
+        
+        return $this->render('visibilite/index.html.twig');
+    }
 
     #[Route('/connexion', name: 'app_connexion')]
     public function connexion(): Response

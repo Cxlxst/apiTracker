@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UsersController!{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/stylech.css') }}">
+{% endblock %}
+{% block body %}
+
+<div class="split-container">
+    <div class="left-container">
+    </div>
+    <div class="right-container-new">
+        <div class="welcomemsg">
+            <h1>Bienvenue sur Tilt Tracker, que souhaitez vous faire?</h1>
+        </div>
+        <div class="login-container">
+        <p>Pseudo</p>
+            <input type="text" id="inputPseudo" placeholder="Pseudo" />
+        <p>Mot de passe</p>
+            <input type="password" id="inputMotDePasse" placeholder="Mot de passe" />
+        <p>Confirmer le mot de passe</p>
+            <input type="password" id="inputMotDePasseVerif" placeholder="Mot de passe" />
+            <div class="buttons">
+                <button id="executeApiButton">Créer un compte</button>
+                <bruh>déja un compte?</bruh><a href="liens vers la page de login">se connecter</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+ 
+    //Permet de détecter l'appui du boutton pour l'ajout d'un match avec stat à un joueur
+    document.getElementById('executeApiButton').addEventListener('click', function () {
+        var pseudo = document.getElementById('inputPseudo').value;
+        var statut = "privé"
+        var nbMatch = 0
+        var mdp = document.getElementById('inputMotDePasse').value;
+        creationCompteUser(pseudo, statut, nbMatch, mdp);
+    }); 
+
+
+    //Déclenchement de l'ajout d'un match avec stat à un joueur et lancement du script
+    function creationCompteUser(pseudo, statut, nbMatch, mdp){
+        const script = document.createElement('script');
+        script.src = "{{ asset('js/appelApi.js') }}";
+        script.setAttribute('data-api-option', 'createAccount,'+pseudo+','+statut+','+nbMatch+','+mdp);
+
+        document.body.appendChild(script);
+
+        script.onload = function () {
+             document.body.removeChild(script);
+        };
+    }
+
+</script>
+
+{% endblock %}

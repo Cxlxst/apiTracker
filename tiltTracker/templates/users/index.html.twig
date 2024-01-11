@@ -10,7 +10,23 @@
     th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
 </style>
 
+
+
+
+    {# ***************************************
+ 
+ 
+                    Page de test
+ 
+ 
+    ***************************************  #}
+
+
+
+
     <h2>Data from API:</h2>
+
+    <input type="text" value="{{ app.session.get('idConnexion') }}">
 
 
     {# Récupération de la liste de tout les joueurs #}
@@ -31,6 +47,43 @@
     <div class="example-wrapper">
         <h2>Récupération des données d'un compte</h2>
         <div id="affichageFicheJoeur"></div>
+    </div>
+
+
+    {# Supression d'un compte #}
+   
+    <div class="example-wrapper">
+        <h2>Supprimer un user</h2>
+        <input type="text" id="inputIdSupression" placeholder="idSupression" />
+        <button id="boutonSupressionUser">Supprimer un user</button>
+    </div>
+
+
+    {# Création d'un match lié à un utilisateur avec ses statistiques #}
+    <div class="example-wrapper">
+        <h2>Supprimer un user</h2>
+
+        <input type="text" id="inputIdUtilisateur" placeholder="id utilisateur" />
+        <input type="text" id="inputIdMatch" placeholder="id match"/>
+        <input type="text" id="statutWin" placeholder="statutWin"/>
+
+        <input type="text" id="inputNbKilled" placeholder="nombre killed"/>
+        <input type="text" id="inputNbDeath" placeholder="nombre de death"/>
+        <input type="text" id="inputNbAssist" placeholder="nombre d'assist"/>
+
+        <button id="BouttonAddMatchToUser">Ajouter le match à l'utilisateur</button>
+
+    </div>
+
+
+    <div class="example-wrapper">
+        <h2>Créer un compte</h2>
+
+        <input type="text" id="inputPseudo" placeholder="Pseudo" />
+        <input type="text" id="inputmdp" placeholder="Mot de passe"/>
+
+        <button id="BouttonCreerCompte">Créer un compte</button>
+
     </div>
 
 
@@ -91,6 +144,9 @@
             };
         }
 
+
+
+
         //Permet d'executer une fonction js si on appui sur un boutton
         //document.getElementById('executeApiButton').addEventListener('click', recuperationDonneAffichageCompte);
 
@@ -147,6 +203,85 @@
                 document.body.removeChild(script);
             };
         }
+
+
+
+
+
+        //Permet de détecter la suppression l'appui bouton pour la supression d'un joueur
+        document.getElementById('boutonSupressionUser').addEventListener('click', function () {
+            var idUser = document.getElementById('inputIdSupression').value;
+            supressionUser(idUser);
+        }); 
+
+
+        //Déclenchement de la supression d'un joueur avec lancement du script
+        function supressionUser(idUser){
+            const script = document.createElement('script');
+            script.src = "{{ asset('js/appelApi.js') }}";
+            script.setAttribute('data-api-option', 'suppressionUser,'+ idUser);
+
+            document.body.appendChild(script);
+
+            script.onload = function () {
+                document.body.removeChild(script);
+            };
+        }
+
+
+
+
+        //Permet de détecter l'appui du boutton pour l'ajout d'un match avec stat à un joueur
+        document.getElementById('BouttonAddMatchToUser').addEventListener('click', function () {
+            var idUtilisateur = document.getElementById('inputIdUtilisateur').value;
+            var idMatch = document.getElementById('inputIdMatch').value;
+            var boolStatutWin = document.getElementById('statutWin').value;
+            var nbKilled = document.getElementById('inputNbKilled').value;
+            var nbDeath = document.getElementById('inputNbDeath').value;
+            var nbAssist = document.getElementById('inputNbAssist').value;
+            AjoutMatchToUser(idUtilisateur, idMatch, boolStatutWin, nbKilled, nbDeath, nbAssist);
+        }); 
+
+
+        //Déclenchement de l'ajout d'un match avec stat à un joueur et lancement du script
+        function AjoutMatchToUser(idUtilisateur, idMatch, idStatutWin, nbKilled, nbDeath, nbAssist){
+            const script = document.createElement('script');
+            script.src = "{{ asset('js/appelApi.js') }}";
+            script.setAttribute('data-api-option', 'ajoutMatchToUser,'+idUtilisateur+','+idMatch+','+idStatutWin+','+nbKilled+','+nbDeath+','+nbAssist);
+
+            document.body.appendChild(script);
+
+            script.onload = function () {
+                document.body.removeChild(script);
+            };
+        }  
+
+
+
+
+        //Permet de détecter l'appui du boutton pour l'ajout d'un match avec stat à un joueur
+        document.getElementById('BouttonCreerCompte').addEventListener('click', function () {
+            var pseudo = document.getElementById('inputPseudo').value;
+            var statut = "privé"
+            var nbMatch = 0
+            var mdp = document.getElementById('inputmdp').value;
+            creationCompteUser(pseudo, statut, nbMatch, mdp);
+        }); 
+
+
+        //Déclenchement de l'ajout d'un match avec stat à un joueur et lancement du script
+        function creationCompteUser(pseudo, statut, nbMatch, mdp){
+            const script = document.createElement('script');
+            script.src = "{{ asset('js/appelApi.js') }}";
+            script.setAttribute('data-api-option', 'createAccount,'+pseudo+','+statut+','+nbMatch+','+mdp);
+
+            document.body.appendChild(script);
+
+            script.onload = function () {
+                document.body.removeChild(script);
+            };
+        }
+
 
 
 
