@@ -54,7 +54,7 @@ class UsersController extends AbstractController
     {
         return $this->render('visibilite/index.html.twig');
     }
-    
+
     #[Route('/infos', name: 'app_infos')]
     public function infosuser(): Response
     {
@@ -71,5 +71,11 @@ class UsersController extends AbstractController
     public function profilUser(): Response
     {
         return $this->render('profil/index.html.twig');
+    }
+
+    #[Route('/match', name: 'app_match')]
+    public function matchUser(): Response
+    {
+        return $this->render('match/index.html.twig');
     }
 }

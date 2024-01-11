@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TILT · Profil{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/circle.css') }}">
+{% endblock %}
+{% block body %}
+
+<div class="split-container">
+    <div class="left-container-classic">
+        <div class="nav-bar">
+            <div class="nav-bar-account">
+                <p>Compte</p>
+                <button class="selected"><img src="../build/images/user.png">Profil</button>
+                <button class="native"><img src="../build/images/match.png">Matchs</button>
+                <button class="native"><img src="../build/images/search.png">Recherche</button>
+            </div>
+            <div class="nav-bar-parameters">
+                <p>Paramètres</p>
+                <button class="native"><img src="../build/images/infos.png">Informations</button>
+                <button class="native"><img src="../build/images/visibility.png">Visibilité</button>
+            </div>
+            <div class="nav-bar-log-out">
+                <button class="native"><img src="../build/images/log_out.png">Déconnexion</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="right-container-classic">
+        <div class="welcomemsg">
+            <h1>Bienvenue dataPseudoJoueur, prêt.e pour une partie ?</h1>
+        </div>
+
+        <svg>
+            <defs>
+                <linearGradient id="GradientColor">
+                    <stop offset="0%" stop-color="#921214"/>
+                    <stop offset="100%" stop-color="#921214"/>
+                </linearGradient>
+            </defs>
+        </svg>
+        <div class="box-600-x-600">
+            <div class="flex-box">
+                <svg>
+                    <circle cx="120px" cy="120px" r="100px"></circle>
+                    <circle cx="120px" cy="120px" r="100px"></circle> 
+                </svg>
+                <h2>Niveau dataNiveau</h2>
+            </div>
+        </div>
+            
+        <div class="box-container-column">
+            <div class="box-550-x-150">
+                <img src="../build/images/infos_red.png">
+                <div class="stack-column">
+                    <p>dataPseudoUser</p>
+                    <p>Inscrit.e depuis le dataDataInscription</p>
+                </div>
+            </div>
+
+            <div class="box-550-x-150">
+                <img src="../build/images/visibility_red.png">
+                <p>Votre compte est dataVisibilite de tous</p>
+            </div>
+
+            <div class="box-550-x-150">
+                <img src="../build/images/match_red.png">
+                <p>Vous avez joué dataMatch matchs au total</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,293 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #FFFFFF;
+    background-color: #333;
+    overflow: hidden;
+}
+
+h2{
+    font-weight: 100;
+}
+
+h3{
+    font-size: 96px;
+    margin: 50px 0px 40px 0px;
+}
+
+.split-container {
+    display: flex;
+    height: 100%;
+    flex-wrap: nowrap;
+}
+
+.left-container {
+    flex: 0 0 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../build/images/logo.png");
+    background-size: 60% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #333;
+}
+
+.left-container-classic {
+    flex: 0 0 350px;
+    display: flex;
+    align-items: center;
+    background-image: url("../build/images/logo.png");
+    background-size: 60% auto;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-color: #333;
+}
+
+.left-container-classic p{
+    font-size: 24px; 
+}
+
+.left-container-classic img{
+    width: 17px;
+    margin-right: 15px;
+}
+
+.nav-bar{
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+}
+
+.nav-bar-account{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    margin-top: 200px;
+}
+
+.nav-bar-parameters{
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-bar-log-out{
+    margin-top: 150px;
+}
+
+.native{
+    width: max-content;
+    font-size: 20px;
+    text-align: left;
+    padding: 10px 30px 10px 15px;
+    margin-bottom: 7px;
+    border-style: none;
+    background-color: #333;
+    color: #FFFFFF;
+}
+
+.native:hover{
+    width: max-content;
+    font-size: 20px;
+    text-align: left;
+    padding: 10px 30px 10px 15px;
+    margin-bottom: 7px;
+    border-style: none;
+    border-radius: 20px;
+    background-color: #6A1613;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.selected{
+    width: max-content;
+    font-size: 20px;
+    text-align: left;
+    padding: 10px 30px 10px 15px;
+    margin-bottom: 7px;
+    border-style: none;
+    border-radius: 20px;
+    background-color: #6A1613;
+    color: #FFFFFF;
+}
+
+.right-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start; /* Aligns children to the left */
+    align-items: center;
+    padding-left: 100px; /* Adds padding on the left */
+    width: 1570px;
+    background-image: url("../build/images/tiltlogo.png");
+    background-size: 50% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #1a1a1a;
+    border-radius: 50px 0 0 50px;
+    position: relative;
+}
+
+.right-container-classic {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start; /* Aligns children to the left */
+    align-items: center;
+    padding-left: 100px; /* Adds padding on the left */
+    width: 1570px;
+    background-color: #1a1a1a;
+    border-radius: 50px 0 0 50px;
+    position: relative;
+}
+
+.right-container p{
+    color: white;
+}
+
+.right-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    border-radius: 50px 0 0 50px;
+}
+
+.welcomemsg {
+    position: absolute;
+    top: 10%;
+    left: 100px;
+    
+    z-index: 3;
+    color: white;
+    text-align: left;
+}
+
+.box-container-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.box-container-line{
+    display: flex;
+}
+
+.box-container-line p{
+    font-size: 18px;
+}
+
+.box-container p{
+    font-size: 18px;
+}
+
+.flex-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 0px 100px 0px;
+}
+
+.box-600-x-600 {
+    position: absolute; /* Positioning relative to the right-container */
+    text-align: center;
+    width: 600px;
+    height: 600px;
+    background-color: #1f201f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box-500-x-300-win {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0px 150px 0px 0px;
+    width: 500px;
+    height: 300px;
+    background-color: #1f201f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    background-image: url("../build/images/match_win.png");
+    background-size: 35% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.box-500-x-300-loose {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0px 0px 0px 0px;
+    width: 500px;
+    height: 300px;
+    background-color: #1f201f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    background-image: url("../build/images/match_loose.png");
+    background-size: 35% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.box-500-x-300 img{
+    margin: 0px 0px 30px 60px;
+    width: 150px;
+}
+
+.box-550-x-150 {
+    display: flex;
+    align-items: center;
+    margin: 38px 0px 38px 450px;
+    text-align: center;
+    width: 550px;
+    height: 150px;
+    background-color: #1f201f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box-550-x-150 img{
+    width: 50px;
+    height: 50px;
+    margin: 0px 30px 0px 20px;
+}
+
+.box-1150-x-200 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 70px 0px 0px 0px;
+    text-align: center;
+    width: 1150px;
+    height: 200px;
+    background-color: #1f201f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box-1150-x-200 p{
+    font-size: 18px;
+}
+
+.box-1150-x-200 h3{
+    font-size: 96px;
+    margin: 0px;
+}
+
+.stack-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.stack-column p{
+    margin: 0px;
+    text-align: left;
+}
