@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TILT · Matchs{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/circle.css') }}">
+{% endblock %}
+{% block body %}
+
+<div class="split-container">
+    <div class="left-container-classic">
+        <div class="nav-bar">
+            <div class="nav-bar-account">
+                <p>Compte</p>
+                <button class="native"><img src="../build/images/user.png">Profil</button>
+                <button class="selected"><img src="../build/images/match.png">Matchs</button>
+                <button class="native"><img src="../build/images/search.png">Recherche</button>
+            </div>
+            <div class="nav-bar-parameters">
+                <p>Paramètres</p>
+                <button class="native"><img src="../build/images/infos.png">Informations</button>
+                <button class="native"><img src="../build/images/visibility.png">Visibilité</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="right-container-classic">
+        <div class="welcomemsg">
+            <h1>Voici les statistiques de vos derniers matchs</h1>
+        </div>
+
+        <div class="box-container-column">
+            <div class="box-container-line">
+                <div class="box-500-x-300-win">
+                    <div class="stack-column">
+                        <h3>123</h3>
+                        <p>C’est le nombre de vos <span style="color:#921214">matchs gagnés</span></p>
+                    </div>
+                </div>
+                    
+                <div class="box-500-x-300-loose">
+                    <div class="stack-column">
+                        <h3>564</h3>
+                        <p>C’est le nombre de vos <span style="color:#921214">matchs perdus</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-1150-x-200">
+                <div class="stack-column">
+                    <h3><span style="color:#921214">222</span></h3>
+                    <p>C’est le nombre <span style="color:#921214">total</span> de vos matchs joués</p>
+                </div>
+            </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+</script>
+
+{% endblock %}
