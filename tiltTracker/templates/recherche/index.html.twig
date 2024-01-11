@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UsersController!{% endblock %}
+{% block title %}TILT · Recherche{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/stylech.css') }}">
     <script>
@@ -23,6 +23,7 @@
         <input type="text" id="recherche"/>
         <button id="executeApiButton">Rechercher un user</button>
 
+
     </div>
 <div class="split-container">
     
@@ -38,6 +39,9 @@
                 <p>Paramètres</p>
                 <button class="native"><img src="../build/images/infos.png">Informations</button>
                 <button class="native"><img src="../build/images/visibility.png">Visibilité</button>
+            </div>
+            <div class="nav-bar-log-out">
+                <button class="native"><img src="../build/images/log_out.png">Déconnexion</button>
             </div>
         </div>
 
