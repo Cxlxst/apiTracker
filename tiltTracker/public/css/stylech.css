@@ -51,20 +51,19 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+        background-color: #1a1a1a; /* Semi-transparent black overlay */
         z-index: 1; /* Ensures the overlay is above the background image */
         border-radius: 50px 0 0 50px; /* Match the border radius of the container */
     }
 
-    .welcomemsg h1{
+    .welcomemsg{
         position: absolute; /* Positions the message absolutely within right-container */
         top: 10%; /* Adjust as necessary */
-        left: 420px; /* Adjust as necessary */
-        transform: translate(-50%, -50%); /* Centers the message */
+        left: 100px; /* Adjust as necessary */
+        
         z-index: 3; /* Ensures it's above the login form */
         color: white; /* Example text color */
         text-align: left; /* Centers the text */
-        font-size: 24px;
     }
 
     .login-container {
@@ -381,15 +380,9 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+        background-color: #1a1a1a; /* Semi-transparent black overlay */
         z-index: 1; /* Ensures the overlay is above the background image */
         border-radius: 50px 0 0 50px; /* Match the border radius of the container */
-    }
-
-    .right-container-inf h1{
-        font-size: 24px;
-        left: 146px;
-        color: white;
     }
 
 .subdiv input {
@@ -481,11 +474,16 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 50px;
+    margin-top: 200px;
 }
 
 .nav-bar-parameters{
     display: flex;
     flex-direction: column;
+}
+
+.nav-bar-log-out{
+    margin-top: 150px;
 }
 
 .native{
