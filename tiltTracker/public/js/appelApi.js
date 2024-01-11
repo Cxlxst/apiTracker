@@ -170,7 +170,7 @@ else if (apiOption[0] === 'verificationConnexion') { // système de véririficat
   console.log("pseudoModifie : " + pseudoModifie + "motDePasse : " + motDePasse)
 
 
-  fetch("http://127.0.0.1:8080/api/userss?pseudo="+pseudoModifie+"&motDePasse="+motDePasse)
+  fetch("http://127.0.0.1:8080/api/connexions?pseudo="+pseudoModifie+"&MDP="+motDePasse)
   .then(response => {
     if (!response.ok) {
       throw new Error('La requête a échoué.');
@@ -191,29 +191,29 @@ else if (apiOption[0] === 'rechercheUser') { // système de recherche de user --
 
 
   console.log("Recherche utilisateur - Désactivé")
-  // var apiData;
-  // var newStatut;
+  var apiData;
+  var newStatut;
 
-  // var recherche = apiOption[1];
-  // // var rechercheModifie = recherche.replace(/ /g, "%20");
+  var recherche = apiOption[1];
+  // var rechercheModifie = recherche.replace(/ /g, "%20");
 
 
-  // console.log("http://127.0.0.1:8080/api/userss?pseudo="+recherche)
+  console.log("http://127.0.0.1:8080/api/userss?pseudo="+recherche)
 
-  // fetch("http://127.0.0.1:8080/api/userss?pseudo="+recherche )
-  // .then(response => {
-  //   if (!response.ok) {
-  //     throw new Error('La requête a échoué.');
-  //   }
-  //   return response.json();
-  // })
-  // .then(data => {
-  //   apiData = data
-  //   resultatRechercheGenerale(apiData); //Dès que les données sont récupérées, elles sont renvoyé à la page principale
-  // })
-  // .catch(error => {
-  //   console.error('Erreur lors de la requête:', error);
-  // });
+  fetch("http://127.0.0.1:8080/api/userss?pseudo="+recherche )
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('La requête a échoué.');
+    }
+      return response.json();
+    })
+    .then(data => {
+      apiData = data
+        resultatRechercheGenerale(apiData); //Dès que les données sont récupérées, elles sont renvoyé à la page principale
+  })
+  .catch(error => {
+    console.error('Erreur lors de la requête:', error);
+  });
 
 
 }
@@ -318,7 +318,7 @@ else if (apiOption[0] === 'createAccount') {
 
   console.log("Création d'un compte")
 
-  //Insertion d'un match lié à un utilisateur avec récupération de l'id de liaison
+  //Création du compte avec les informations personnel
   fetch("http://127.0.0.1:8080/api/userss", {
     method: 'POST',
     headers: {
@@ -343,6 +343,41 @@ else if (apiOption[0] === 'createAccount') {
     apiData = data;
     console.log(apiData)
     console.log("ID inséré :", apiData.id); 
+    var idCompteCree = apiData.id
+
+    //Insertion du pseudo et du mot de passe dans la bdd
+    fetch("http://127.0.0.1:8080/api/connexions", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/ld+json',
+        'Content-Type': 'application/ld+json',
+      },
+      body: JSON.stringify({
+        "user": '/api/userss/'+idCompteCree,
+        "pseudo": apiOption[1],
+        "MDP": apiOption[4]
+      }),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('La requête inséré compte a échoué.');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // data contient la réponse JSON de la requête
+      apiData = data;
+      console.log(apiData)
+      console.log("ID inséré :", apiData.id); 
+
+      window.location.href = "/connexion";
+
+    })
+    .catch(error => {
+      console.error('Erreur lors de la requête:', error);
+    });
+
+
 
     window.location.href = "/connexion";
 
