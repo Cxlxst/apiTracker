@@ -12,6 +12,11 @@ h2{
     font-weight: 100;
 }
 
+h3{
+    font-size: 96px;
+    margin: 50px 0px 40px 0px;
+}
+
 .split-container {
     display: flex;
     height: 100%;
@@ -142,48 +147,19 @@ h2{
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-    z-index: 1; /* Ensures the overlay is above the background image */
-    border-radius: 50px 0 0 50px; /* Match the border radius of the container */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    border-radius: 50px 0 0 50px;
 }
 
 .welcomemsg {
-    position: absolute; /* Positions the message absolutely within right-container */
-    top: 10%; /* Adjust as necessary */
-    left: 100px; /* Adjust as necessary */
+    position: absolute;
+    top: 10%;
+    left: 100px;
     
-    z-index: 3; /* Ensures it's above the login form */
-    color: white; /* Example text color */
-    text-align: left; /* Centers the text */
-}
-
-.login-container {
-    text-align: left;
-    max-width: 400px;
-    width: 100%;
-    padding: 20px;
-    border-radius: 10px;
-    position: relative; /* Make sure it's above the pseudo-element */
-    z-index: 2;
-}
-.login-container input {
-    width: 80%;
-    margin-bottom: 15px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-}
-.login-container button {
-    width: 50%;
-    padding-top: 20px;
-    padding: 10px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 20px;
-    background-color: #c0392b;
+    z-index: 3;
     color: white;
-    cursor: pointer;
-    font-size: 1em;
+    text-align: left;
 }
 
 .box-container-column{
@@ -193,7 +169,10 @@ h2{
 
 .box-container-line{
     display: flex;
-    flex-wrap: nowrap;
+}
+
+.box-container-line p{
+    font-size: 18px;
 }
 
 .box-container p{
@@ -209,13 +188,53 @@ h2{
 
 .box-600-x-600 {
     position: absolute; /* Positioning relative to the right-container */
-    /* right: 80px; */
     text-align: center;
     width: 600px;
     height: 600px;
     background-color: #1f201f;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box-500-x-300-win {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0px 150px 0px 0px;
+    width: 500px;
+    height: 300px;
+    background-color: #1f201f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    background-image: url("../build/images/match_win.png");
+    background-size: 35% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.box-500-x-300-loose {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0px 0px 0px 0px;
+    width: 500px;
+    height: 300px;
+    background-color: #1f201f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    background-image: url("../build/images/match_loose.png");
+    background-size: 35% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.box-500-x-300 img{
+    margin: 0px 0px 30px 60px;
+    width: 150px;
 }
 
 .box-550-x-150 {
@@ -234,6 +253,28 @@ h2{
     width: 50px;
     height: 50px;
     margin: 0px 30px 0px 20px;
+}
+
+.box-1150-x-200 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 70px 0px 0px 0px;
+    text-align: center;
+    width: 1150px;
+    height: 200px;
+    background-color: #1f201f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box-1150-x-200 p{
+    font-size: 18px;
+}
+
+.box-1150-x-200 h3{
+    font-size: 96px;
+    margin: 0px;
 }
 
 .stack-column{
