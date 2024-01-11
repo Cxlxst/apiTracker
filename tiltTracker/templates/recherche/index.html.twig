@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello UsersController!{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/stylech.css') }}">
+    <script>
+    var BASE_URL = '{{ asset('') }}';
+    </script>
 
+{% endblock %}
 {% block body %}
 <style>
     .example-wrapper { max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
@@ -17,14 +23,39 @@
         <input type="text" id="recherche"/>
         <button id="executeApiButton">Rechercher un user</button>
 
+
+    </div> #}
+<div class="split-container">
+    
+    <div class="left-container-classic">
+    <div class="nav-bar">
+            <div class="nav-bar-account">
+                <p>Compte</p>
+                <button class="native"><img src="../build/images/user.png">Profil</button>
+                <button class="native"><img src="../build/images/match.png">Matchs</button>
+                <button class="selected"><img src="../build/images/search.png">Recherche</button>
+            </div>
+            <div class="nav-bar-parameters">
+                <p>Paramètres</p>
+                <button class="native"><img src="../build/images/infos.png">Informations</button>
+                <button class="native"><img src="../build/images/visibility.png">Visibilité</button>
+            </div>
+        </div>
+
     </div>
 
-    <div class="example-wrapper">
-        <h2>Liste de nos joueurs</h2>
-        <div id="divListeJoueur"></div>
-        <script src="{{ asset('js/appelApi.js') }}" data-api-option="getListe"></script>
+    <div class="right-container-inf">
+        <div class="containerfix">
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-bar" placeholder="Rechercher un joueur" />
+            </div>
+            <div class="example-wrapper">
+                <h2>Liste de nos joueurs</h2>
+                <div id="divListeJoueur"></div>
+                <script src="{{ asset('js/appelApi.js') }}" data-api-option="getListe"></script>
+            </div>
+        </div>
     </div>
-
 
 
     
@@ -32,43 +63,74 @@
 
 
         //Cette requête est appelé au moment ou la liste des utilisateurs est récupérer par l'appel api, elle affiche ensuite un tableau
-        function miseEnPlaceListeJoueur(data) {
-            var table = document.createElement('table');
-            table.border = '1';
+function miseEnPlaceListeJoueur(data) {
+    // Check if the data array is not empty and has the properties we expect
+    if (!data || !data.length || !('pseudo' in data[0]) || !('statut' in data[0])) {
+        console.error('Les champs sont vides');
+        return;
+    }
 
-            var thead = document.createElement('thead');
-            var headerRow = thead.insertRow();
-            Object.keys(data[0]).forEach(function(key) {
-                var th = document.createElement('th');
-                th.appendChild(document.createTextNode(key));
-                headerRow.appendChild(th);
+    // Use a document fragment to improve performance when appending children
+    var fragment = document.createDocumentFragment();
+
+    data.forEach(function(item) {
+        // Create a container div for each player that mimics a table row
+        var playerRow = document.createElement('div');
+        playerRow.className = 'player-row';
+
+        // Create a div for the player's pseudo
+        var pseudoDiv = document.createElement('div');
+        pseudoDiv.className = 'player-data';
+        pseudoDiv.textContent = item.pseudo;
+        playerRow.appendChild(pseudoDiv);
+
+        // Create the divider
+        var divider = document.createElement('div');
+        divider.className = 'player-divider';
+        playerRow.appendChild(divider);
+
+        // Create a container for the player's status and image
+        var statusContainer = document.createElement('div');
+        statusContainer.className = 'player-status-container';
+
+        // Create an img element for the status icon
+        var statusImg = document.createElement('img');
+        statusImg.className = 'status-image';
+        statusImg.src = BASE_URL + (item.statut === 'Profil privé' ? 'build/images/Eyepub.png' : 'build/images/Eyepriv.png'); // Replace with actual paths
+        statusContainer.appendChild(statusImg);
+
+        // Create a div for the player's status text
+        var statusDiv = document.createElement('div');
+        statusDiv.className = 'player-data';
+        statusDiv.textContent = item.statut;
+        statusContainer.appendChild(statusDiv);
+
+        // Add the status container to the player row
+        playerRow.appendChild(statusContainer);
+
+        if (item.statut == 'public') {
+            var button = document.createElement('button');
+            button.textContent = 'Voir le profil';
+            button.className = 'view-profile-button';
+            button.addEventListener('click', function() {
+                window.location.href = '{{ path("app_users") }}?id=' + item.id;
             });
-            table.appendChild(thead);
-
-            var tbody = document.createElement('tbody');
-            data.forEach(function(item) {
-
-                var row = tbody.insertRow();
-                Object.values(item).forEach(function(value) {
-                    var cell = row.insertCell();
-                    cell.appendChild(document.createTextNode(value));
-                });
-
-                // Ajout du bouton pour consulter le profil
-                var cellButton = row.insertCell();
-                var button = document.createElement('button');
-                button.innerHTML = 'voir le profil';
-                button.addEventListener('click', function() {
-                 window.location.href = '{{ path("app_users") }}?id=' + item.id;
-                });
-                cellButton.appendChild(button); 
-
-            });
-
-            table.appendChild(tbody);
-
-            document.getElementById('divListeJoueur').appendChild(table);
+            playerRow.appendChild(button);
         }
+
+        // Append the player row to the document fragment
+        fragment.appendChild(playerRow);
+    });
+
+    // Select the div where the player rows should be displayed
+    var divListeJoueur = document.getElementById('divListeJoueur');
+    divListeJoueur.innerHTML = ''; // Clear any existing content
+    divListeJoueur.appendChild(fragment); // Append the document fragment to the DOM
+}
+
+
+
+
 
 
 
