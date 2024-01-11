@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UsersController!{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/stylech.css') }}">
+{% endblock %}
+{% block body %}
+
+<div class="split-container">
+    <div class="left-container">
+    </div>
+    <div class="right-container-new">
+        <div class="welcomemsg">
+            <h1>Bienvenue sur Tilt Tracker, que souhaitez vous faire?</h1>
+        </div>
+        <div class="login-container">
+        <p>Pseudo</p>
+            <input type="text" id="inputPseudo" placeholder="Pseudo" />
+        <p>Mot de passe</p>
+            <input type="password" id="inputMotDePasse" placeholder="Mot de passe" />
+        <p>Confirmer le mot de passe</p>
+            <input type="password" id="inputMotDePasse" placeholder="Mot de passe" />
+            <div class="buttons">
+                <button id="executeApiButton">Créer un compte</button>
+                <bruh>déja un compte?</bruh><a href="liens vers la page de login">se connecter</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    // JavaScript for API verification
+    function verificationDesIdentifiantsConnexion(pseudo, motDePasse) {
+        const script = document.createElement('script');
+        script.src = "{{ asset('js/appelApi.js') }}";
+        script.setAttribute('data-api-option', 'verificationConnexion,'+ pseudo +','+ motDePasse);
+        document.body.appendChild(script);
+        script.onload = function () {
+            document.body.removeChild(script);
+        };
+    }
+
+    document.getElementById('executeApiButton').addEventListener('click', function () {
+        var pseudo = document.getElementById('inputPseudo').value;
+        var motDePasse = document.getElementById('inputMotDePasse').value;
+        verificationDesIdentifiantsConnexion(pseudo, motDePasse);
+    });
+
+    function gestionEtatConnexion(data) {
+        console.log(data);
+        if(apiData['hydra:totalItems'] != 0) {
+            console.log("Connexion autorisé");
+            var idUser = apiData['hydra:member'][0]['id'];
+            console.log(idUser);
+        } else {
+            console.log("Connexion refusé");
+        }
+    }
+</script>
+
+{% endblock %}
