@@ -6,8 +6,9 @@ Challenge Web : API tracker de statistiques ingame
 
 Pour installer le projet, suivre les prochaines indications :
 1. Cloner le repository sur votre PC
-2. Installer la BDD (.sql) sur PhpMyAdmin, la table est nommée "tilt"
-3. Pour vous connecter au site, voici un compte test
+2. Placez-vous sur preprod
+3. Installer la BDD (.sql) sur PhpMyAdmin, la table est nommée "tilt"
+4. Pour vous connecter au site, voici un compte test
    login : Admin
    password : N0HB16psBo2iEmVk
 
