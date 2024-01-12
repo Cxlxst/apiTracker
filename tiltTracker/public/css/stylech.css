@@ -403,17 +403,6 @@
         left: 146px;
     }
 
-    .right-container-inf::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #1a1a1a; /* Semi-transparent black overlay */
-        z-index: 1; /* Ensures the overlay is above the background image */
-        border-radius: 50px 0 0 50px; /* Match the border radius of the container */
-    }
 
 .subdiv input {
     font-size: 18px;
@@ -537,6 +526,10 @@
     flex-direction: column;
 }
 
+#nav-bar-log-out{
+    margin-top: 150px;
+}
+
 .nav-bar-log-out{
     margin-top: 150px;
 }
@@ -649,17 +642,26 @@
     text-decoration: underline;
 }
 
+.scrollable-content:hover,
+.scrollable-content:active,
+.scrollable-content:focus {
+    overflow-y: scroll;
+}
+
+.divlisteJoueurAffichage::-webkit-scrollbar {
+    display: none;
+}
 
 .divlisteJoueurAffichage{
     height: 600px;
     width: 600px;
     overflow-y: auto;
+    z-index:57;
 } 
 
 
 
-#divListeJoueur .player-row {
-   
+.player-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -669,11 +671,9 @@
     border-radius: 10px;
     transition: 0.5s;
     width: 350px;
-    z-index:57;
 }
 
-#divListeJoueur .player-row:hover {
-
+.player-row:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -683,7 +683,6 @@
     padding: 12px;
     border-radius: 10px;
     transition: 0.5s;
-    z-index:57;
 }
 
 #divListeJoueur .player-data {
@@ -705,13 +704,28 @@
    or margins that could interfere with the layout */
 #divListeJoueur {
 
-    background-color: #c0392b;
     padding: 0;
     margin: 0;
     z-index:57;
 }
-.example-wrapper{
+
+
+#divListeJoueur .player-divider {
+    
+    height: 24px; /* or the height of your player-data elements */
+    width: 2px; /* or the width you desire for your divider */
+    background-color: #dddddd63; /* color of the divider */
+    margin: 0 10px; /* space around the divider */
     z-index:57;
+}
+
+
+/* Hover effect for buttons */
+button:hover {
+    background-color: #e44; /* Slightly darker on hover */
+}
+
+.containerfix{
     color: white;
 }
 
@@ -727,7 +741,6 @@
     align-items: center; /* Aligns items vertically in the center */
     justify-content: flex-start; /* Aligns items to the start of the container */
     gap: 10px; /* Optional: adds space between the image and the text */
-    z-index:57;
 }
 
 .search-container {
@@ -749,7 +762,8 @@
     outline: none; /* removes the default focus outline */
     background-color: rgba(31, 32, 31, 1);
     color: #999;
-    position: relative
+    position: relative;
+    margin-bottom: 40px;
 }
 
 .search-bar::placeholder {
@@ -761,6 +775,16 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* more pronounced shadow when focused */
 }
 
-.box-container-all{
-    z-index:3;
+.view-profile-button
+{
+    width: 113px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #c0392b;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 30px;
+    line-height: 0.5;
 }
