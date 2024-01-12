@@ -175,6 +175,12 @@
         };
     }
 
+    function redirectionSuppresionCompte()
+    {
+        window.location.href = '{{ path("app_deconnexionUser") }}';
+    }
+
+
 
 
     document.getElementById('buttonModifierPseudo').addEventListener('click', function () {
@@ -198,7 +204,7 @@
         };
     }
 
-
+    
     document.getElementById('bouttonDeconnexion').addEventListener('click', function () {
         
        window.location.href = '{{ path("app_deconnexionUser") }}';
