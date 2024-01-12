@@ -7,29 +7,42 @@
 {% endblock %}
 {% block body %}
 
+
+<input type="hidden" id="identifiantUser" value="{{ app.session.get('idConnexion') }}">
+
 <div class="split-container">
     <div class="left-container-classic">
         <div class="nav-bar">
             <div class="nav-bar-account">
                 <p>Compte</p>
+                
                 <button class="selected"><img src="../build/images/user.png">Profil</button>
-                <button class="native"><img src="../build/images/match.png">Matchs</button>
-                <button class="native"><img src="../build/images/search.png">Recherche</button>
+
+                <a href="{{ path("app_match") }}">
+                    <button class="native"><img src="../build/images/match.png">Matchs</button>
+                </a>
+                <a href="{{ path("app_recherche") }}">
+                    <button class="native"><img src="../build/images/search.png">Recherche</button>
+                </a>
             </div>
             <div class="nav-bar-parameters">
                 <p>Paramètres</p>
-                <button class="native"><img src="../build/images/infos.png">Informations</button>
-                <button class="native"><img src="../build/images/visibility.png">Visibilité</button>
+                <a href="{{ path("app_infos") }}">
+                    <button class="native"><img src="../build/images/infos.png">Informations</button>
+                </a>
+                <a href="{{ path("app_visibilite") }}">
+                    <button class="native"><img src="../build/images/visibility.png">Visibilité</button>
+                </a>
             </div>
             <div class="nav-bar-log-out">
-                <button class="native"><img src="../build/images/log_out.png">Déconnexion</button>
+                <button id="bouttonDeconnexion" class="native"><img src="../build/images/log_out.png">Déconnexion</button>
             </div>
         </div>
     </div>
     
     <div class="right-container-classic">
         <div class="welcomemsg">
-            <h1>Bienvenue dataPseudoJoueur, prêt.e pour une partie ?</h1>
+            <h1 id="pseudo">...</h1>
         </div>
 
         <svg>
@@ -46,7 +59,7 @@
                     <circle cx="120px" cy="120px" r="100px"></circle>
                     <circle cx="120px" cy="120px" r="100px"></circle> 
                 </svg>
-                <h2>Niveau dataNiveau</h2>
+                <h2 id="niveauJoueur">...</h2>
             </div>
         </div>
             
@@ -54,25 +67,156 @@
             <div class="box-550-x-150">
                 <img src="../build/images/infos_red.png">
                 <div class="stack-column">
-                    <p>dataPseudoUser</p>
-                    <p>Inscrit.e depuis le dataDataInscription</p>
+                    <p id="pseudoAffichageDossier">...</p>
+                    <p>Inscrit.e depuis le 12/02/2024</p>
                 </div>
             </div>
 
             <div class="box-550-x-150">
                 <img src="../build/images/visibility_red.png">
-                <p>Votre compte est dataVisibilite de tous</p>
+                <p id="statutActuelElement">...</p>
             </div>
 
             <div class="box-550-x-150">
                 <img src="../build/images/match_red.png">
-                <p>Vous avez joué dataMatch matchs au total</p>
+                <p id="nbMatchJoue">...</p>
             </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
+
+    //Récupération du statut en direct
+    var identifiantUserValue = document.getElementById('identifiantUser').value;
+
+    //Gestion de la redirection si un dutilisateur n'est pas connecté
+    if(identifiantUserValue == 0)
+    {
+        window.location.href = '{{ path("app_redirectionRecherche") }}';
+    }
+
+
+    //Permet de récupérer les inforamtions du compte
+    const scriptInfoPerso = document.createElement('script');
+    scriptInfoPerso.src = "{{ asset('js/appelApi.js') }}";
+    scriptInfoPerso.setAttribute('data-api-option', 'getSpecificStatutAccount,'+ identifiantUserValue);
+
+    document.body.appendChild(scriptInfoPerso);
+
+    scriptInfoPerso.onload = function () {
+        document.body.removeChild(scriptInfoPerso);
+    };
+
+
+    function miseEnPlaceStatutActuel(data) {
+
+        var statutActuel = data.statut
+        var pseudo = data.pseudo
+
+        var textStatutActuel = document.getElementById('statutActuelElement');
+        textStatutActuel.textContent = "Votre compte est " + statutActuel;
+
+        var textPseudo = document.getElementById('pseudo');
+        textPseudo.textContent = "Bienvenue " + pseudo + ", prêt.e pour une partie ?";
+
+        var textPseudoAffichageDossier = document.getElementById('pseudoAffichageDossier');
+        textPseudoAffichageDossier.textContent = "Pseudo : " + pseudo;
+
+        
+    }
+
+
+
+    //Récupération des statistiques pour calcul du niveau
+    var script = document.createElement('script');
+    script.src = "{{ asset('js/appelApi.js') }}";
+    script.setAttribute('data-api-option', 'rechercheNbWin,'+ identifiantUserValue);
+
+    document.body.appendChild(script);
+
+    script.onload = function () {
+        document.body.removeChild(script);
+    };
+
+    var levelWin = 0
+    var totalMatch = 0
+
+
+    var pageActuel = 1
+    var calculTotalPage = 0
+    var membreDataFinal = []
+    
+
+    function affichageUserWinPage(data) {
+        
+        var totalItems = data['hydra:totalItems']
+        console.log(totalItems)
+        calculTotalPage =  Math.ceil(totalItems/30)
+        console.log(calculTotalPage)
+
+        membreDataFinal.push(data['hydra:member'])
+
+        if(pageActuel < calculTotalPage)
+        {
+            pageActuel++
+            console.log("Boucle")
+
+            var script = document.createElement('script');
+            script.src = "{{ asset('js/appelApi.js') }}";
+            script.setAttribute('data-api-option', 'rechercheNbWin,'+ identifiantUserValue+","+pageActuel);
+            
+            document.body.appendChild(script);
+
+            script.onload = function () {
+                document.body.removeChild(script);
+            };
+        }   
+        else
+        {
+            console.log("Go Affichage")
+            let tableauCombine = [].concat(...membreDataFinal);
+            affichageUserWin(tableauCombine)
+        }
+
+
+    }
+
+
+
+    function affichageUserWin(dataUser) {
+        
+        console.log(dataUser)
+
+
+        dataUser.forEach(function(element, index, array) {
+
+            if(element['win'] == true)
+            {
+                levelWin += 1000
+            }
+          
+            totalMatch++
+
+        });
+
+        
+        var resultatCalculLevel = (levelWin/10000)
+
+        var inputTotalMatch = document.getElementById('niveauJoueur');
+        inputTotalMatch.textContent = "Niveau "+ resultatCalculLevel;
+
+
+        var inputTotalMatch = document.getElementById('nbMatchJoue');
+        inputTotalMatch.textContent = "Vous avez joué "+ totalMatch +" matchs au total";
+        
+    }
+
+    document.getElementById('bouttonDeconnexion').addEventListener('click', function () {
+        
+       window.location.href = '{{ path("app_deconnexionUser") }}';
+
+    });
 
 </script>
 

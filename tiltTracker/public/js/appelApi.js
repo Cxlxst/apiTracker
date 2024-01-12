@@ -57,7 +57,7 @@ else if (apiOption[0] === 'getSpecificAccount') //Récupération d'une fiche use
 else if (apiOption[0] === 'getSpecificStatutAccount') //Récupération d'une fiche user --- apiOption : [0]:type de vérification - [1]: idUser
 {
 
-  console.log("Affichage d'une fiche utilisateur")
+  console.log("Affichage d'une fiche utilisateur ")
   var apiData;
 
   fetch("http://127.0.0.1:8080/api/userss/"+ apiOption[1])
@@ -71,6 +71,29 @@ else if (apiOption[0] === 'getSpecificStatutAccount') //Récupération d'une fic
     apiData = data
     console.log(apiData)
     miseEnPlaceStatutActuel(apiData); //Dès que les données sont récupérées, elles sont renvoyé à la page principale
+  })
+  .catch(error => {
+    console.error('Erreur lors de la requête:', error);
+  });
+
+}
+else if (apiOption[0] === 'getConnexionPseudo') //Recupération du pseudo utilisateur --- apiOption : [0]:type de vérification - [1]: id user bdd connexion
+{
+
+  console.log("Récupération de l'identifiant de connexion")
+  var apiData;
+
+  fetch("http://127.0.0.1:8080/api/connexions/"+ apiOption[1])
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('La requête a échoué.');
+    }
+    return response.json();
+  })
+  .then(data => {
+    apiData = data
+    console.log(apiData)
+    miseEnPlacePseudoConnexion(apiData); //Dès que les données sont récupérées, elles sont renvoyé à la page principale
   })
   .catch(error => {
     console.error('Erreur lors de la requête:', error);
@@ -195,10 +218,6 @@ else if (apiOption[0] === 'rechercheUser') { // système de recherche de user --
   var newStatut;
 
   var recherche = apiOption[1];
-  // var rechercheModifie = recherche.replace(/ /g, "%20");
-
-
-  console.log("http://127.0.0.1:8080/api/userss?pseudo="+recherche)
 
   fetch("http://127.0.0.1:8080/api/userss?pseudo="+recherche )
   .then(response => {
@@ -209,7 +228,46 @@ else if (apiOption[0] === 'rechercheUser') { // système de recherche de user --
     })
     .then(data => {
       apiData = data
-        resultatRechercheGenerale(apiData); //Dès que les données sont récupérées, elles sont renvoyé à la page principale
+      resultatRechercheGenerale(apiData); //Dès que les données sont récupérées, elles sont renvoyé à la page principale
+  })
+  .catch(error => {
+    console.error('Erreur lors de la requête:', error);
+  });
+
+
+}
+else if (apiOption[0] === 'rechercheNbWin') { // système de recherche de user --- apiOption : [0]:type de vérification - [1]: recherche
+
+
+  console.log("Recherche utilisateur - Désactivé")
+  var apiData;
+  var newStatut;
+
+  var idUser = apiOption[1];
+
+  if(apiOption[2] == null || apiOption[2] == undefined || apiOption[2] == "")
+  {
+    var page = 1
+  }
+  else
+  {
+    var page = apiOption[2];
+  }
+
+  console.log("page : "+page)
+  
+  
+
+  fetch("http://127.0.0.1:8080/api/match_users?user_id="+idUser+"&page="+page)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('La requête a échoué.');
+    }
+      return response.json();
+    })
+    .then(data => {
+      apiData = data
+      affichageUserWinPage(apiData); //Dès que les données sont récupérées, elles sont renvoyé à la page principale
   })
   .catch(error => {
     console.error('Erreur lors de la requête:', error);

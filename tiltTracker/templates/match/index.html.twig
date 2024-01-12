@@ -7,22 +7,34 @@
 {% endblock %}
 {% block body %}
 
+<input type="hidden" id="identifiantUser" value="{{ app.session.get('idConnexion') }}">
+
 <div class="split-container">
     <div class="left-container-classic">
         <div class="nav-bar">
             <div class="nav-bar-account">
                 <p>Compte</p>
-                <button class="native"><img src="../build/images/user.png">Profil</button>
+                <a href="{{ path("app_profil") }}">
+                    <button class="native"><img src="../build/images/user.png">Profil</button>
+                </a>
+                
                 <button class="selected"><img src="../build/images/match.png">Matchs</button>
-                <button class="native"><img src="../build/images/search.png">Recherche</button>
+                
+                <a href="{{ path("app_recherche") }}">
+                    <button class="native"><img src="../build/images/search.png">Recherche</button>
+                </a> 
             </div>
             <div class="nav-bar-parameters">
                 <p>Paramètres</p>
-                <button class="native"><img src="../build/images/infos.png">Informations</button>
-                <button class="native"><img src="../build/images/visibility.png">Visibilité</button>
+                <a href="{{ path("app_infos") }}">
+                    <button class="native"><img src="../build/images/infos.png">Informations</button>
+                </a> 
+                <a href="{{ path("app_visibilite") }}">
+                    <button class="native"><img src="../build/images/visibility.png">Visibilité</button>
+                </a> 
             </div>
             <div class="nav-bar-log-out">
-                <button class="native"><img src="../build/images/log_out.png">Déconnexion</button>
+                <button id="bouttonDeconnexion" class="native"><img src="../build/images/log_out.png">Déconnexion</button>
             </div>
         </div>
     </div>
@@ -36,14 +48,14 @@
             <div class="box-container-line">
                 <div class="box-500-x-300-win">
                     <div class="stack-column">
-                        <h3>123</h3>
+                        <h3 id="matchGagne">...</h3>
                         <p>C’est le nombre de vos <span style="color:#921214">matchs gagnés</span></p>
                     </div>
                 </div>
                     
                 <div class="box-500-x-300-loose">
                     <div class="stack-column">
-                        <h3>564</h3>
+                        <h3 id="matchPerdu">...</h3>
                         <p>C’est le nombre de vos <span style="color:#921214">matchs perdus</span></p>
                     </div>
                 </div>
@@ -51,7 +63,7 @@
 
             <div class="box-1150-x-200">
                 <div class="stack-column">
-                    <h3><span style="color:#921214">222</span></h3>
+                    <h3 id="matchTotal"><span style="color:#921214">...</span></h3>
                     <p>C’est le nombre <span style="color:#921214">total</span> de vos matchs joués</p>
                 </div>
             </div>
@@ -59,6 +71,114 @@
 </div>
 
 <script type="text/javascript">
+
+    //Récupération du statut en direct
+    var identifiantUserValue = document.getElementById('identifiantUser').value;
+
+    //Gestion de la redirection si un dutilisateur n'est pas connecté
+    if(identifiantUserValue == 0)
+    {
+        window.location.href = '{{ path("app_redirectionRecherche") }}';
+    }
+    
+
+
+
+    //Récupération des statistiques
+    const script = document.createElement('script');
+    script.src = "{{ asset('js/appelApi.js') }}";
+    script.setAttribute('data-api-option', 'rechercheNbWin,'+ identifiantUserValue);
+
+    document.body.appendChild(script);
+
+    script.onload = function () {
+        document.body.removeChild(script);
+    };
+
+    var nbWin = 0
+    var nbPerdu = 0
+    var totalMatch = 0
+
+    var pageActuel = 1
+    var calculTotalPage = 0
+    var membreDataFinal = []
+
+
+    function affichageUserWinPage(data) {
+        
+        var totalItems = data['hydra:totalItems']
+        console.log(totalItems)
+        calculTotalPage =  Math.ceil(totalItems/30)
+        console.log(calculTotalPage)
+
+        membreDataFinal.push(data['hydra:member'])
+
+        if(pageActuel < calculTotalPage)
+        {
+            pageActuel++
+            console.log("Boucle")
+
+            var script = document.createElement('script');
+            script.src = "{{ asset('js/appelApi.js') }}";
+            script.setAttribute('data-api-option', 'rechercheNbWin,'+ identifiantUserValue+","+pageActuel);
+            
+            document.body.appendChild(script);
+
+            script.onload = function () {
+                document.body.removeChild(script);
+            };
+        }   
+        else
+        {
+            console.log("Go Affichage")
+            let tableauCombine = [].concat(...membreDataFinal);
+            affichageUserWin(tableauCombine)
+        }
+
+
+    }
+
+
+
+    function affichageUserWin(dataUser) {
+        
+        console.log(dataUser)
+
+
+        dataUser.forEach(function(element, index, array) {
+
+            if(element['win'] == true)
+            {
+                nbWin++
+            }
+            else
+            {
+                nbPerdu++
+            }
+
+            totalMatch++
+
+        });
+
+        var inputNbWin = document.getElementById('matchGagne');
+        var inputNbPerdu = document.getElementById('matchPerdu');
+        var inputTotalMatch = document.getElementById('matchTotal');
+
+        inputNbWin.textContent = nbWin;
+        inputNbPerdu.textContent = nbPerdu;
+        inputTotalMatch.textContent = totalMatch;
+
+    }
+
+
+
+
+    document.getElementById('bouttonDeconnexion').addEventListener('click', function () {
+        
+       window.location.href = '{{ path("app_deconnexionUser") }}';
+
+    });
+
 
 </script>
 

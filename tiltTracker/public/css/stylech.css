@@ -403,7 +403,7 @@
         left: 146px;
     }
 
-        .right-container-inf::after {
+    .right-container-inf::after {
         content: "";
         position: absolute;
         top: 0;
@@ -649,7 +649,17 @@
     text-decoration: underline;
 }
 
+
+.divlisteJoueurAffichage{
+    height: 600px;
+    width: 600px;
+    overflow-y: auto;
+} 
+
+
+
 #divListeJoueur .player-row {
+   
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -663,6 +673,7 @@
 }
 
 #divListeJoueur .player-row:hover {
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -676,12 +687,15 @@
 }
 
 #divListeJoueur .player-data {
+   
     /* Style for the pseudo and status divs */
+    
     margin-right: 10px; /* Spacing between the data and the button */
     z-index:57;
 }
 
 #divListeJoueur .view-profile-button {
+    
     /* Your button styles */
     margin-left: auto; /* Push the button to the right */
     z-index:57;
@@ -690,23 +704,17 @@
 /* Ensure that the container for the player rows does not have padding
    or margins that could interfere with the layout */
 #divListeJoueur {
+
+    background-color: #c0392b;
     padding: 0;
     margin: 0;
     z-index:57;
 }
-
 .example-wrapper{
     z-index:57;
     color: white;
 }
 
-#divListeJoueur .player-divider {
-    height: 24px; /* or the height of your player-data elements */
-    width: 2px; /* or the width you desire for your divider */
-    background-color: #dddddd63; /* color of the divider */
-    margin: 0 10px; /* space around the divider */
-    z-index:57;
-}
 
 .status-image {
     width: 20px;
@@ -739,9 +747,9 @@
     border-radius: 25px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* subtle shadow for depth */
     outline: none; /* removes the default focus outline */
-    margin-top: -300px;
     background-color: rgba(31, 32, 31, 1);
     color: #999;
+    position: relative
 }
 
 .search-bar::placeholder {

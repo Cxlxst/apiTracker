@@ -6,8 +6,11 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\UserMatchStatRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: UserMatchStatRepository::class)]
 #[ApiResource]
+
+
 class UserMatchStat
 {
     #[ORM\Id]

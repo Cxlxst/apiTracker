@@ -6,8 +6,8 @@
 {% endblock %}
 {% block body %}
 
-<input type="text" id="identifiantUser" value="{{ app.session.get('idConnexion') }}">
-<input type="text" id="identifiantUserBddConnexion" value="{{ app.session.get('idUserBddConnexion') }}">
+<input type="hidden" id="identifiantUser" value="{{ app.session.get('idConnexion') }}">
+<input type="hidden" id="identifiantUserBddConnexion" value="{{ app.session.get('idUserBddConnexion') }}">
 
 {# <input type="text" id="statutActuelUser"> #}
 
@@ -17,8 +17,12 @@
     <div class="nav-bar">
             <div class="nav-bar-account">
                 <p>Compte</p>
-                <button class="native"><img src="../build/images/user.png">Profil</button>
-                <button class="native"><img src="../build/images/match.png">Matchs</button>
+                <a href="{{ path("app_profil") }}">
+                    <button class="native"><img src="../build/images/user.png">Profil</button>
+                </a>
+                <a href="{{ path("app_match") }}">
+                    <button class="native"><img src="../build/images/match.png">Matchs</button>
+                </a>
                 <a href="{{ path("app_recherche") }}">
                     <button class="native"><img src="../build/images/search.png">Recherche</button>
                 </a>
@@ -31,7 +35,7 @@
                 </a>
             </div>
             <div class="nav-bar-log-out">
-                <button class="native"><img src="../build/images/log_out.png">Déconnexion</button>
+                <button id="bouttonDeconnexion" class="native"><img src="../build/images/log_out.png">Déconnexion</button>
             </div>
         </div>
     </div>
@@ -58,13 +62,13 @@
 
         <div class="red-box-inf">
             <div class="subdiv">
-                <p><b>Pseudo actuel</b></p>
-                <p id="pseudo">...</p>
+                <p><b>Indentifiant de connexion</b></p>
+                <p id="identifiantConnexion">...</p>
             </div>
 
             <div class="subdiv">
-                <p><b>Date d'inscription</b></p>
-                <p>{JJ/MM/AAAA}</p>
+                <p><b>Pseudo actuel</b></p>
+                <p id="pseudo">...</p>
             </div>
 
             <div class="subdiv">
@@ -86,7 +90,41 @@
 
     //Récupération du statut en direct
     var identifiantUserValue = document.getElementById('identifiantUser').value;
+    var idUserBddConnexion = document.getElementById('identifiantUserBddConnexion').value;
 
+    //Gestion de la redirection si un dutilisateur n'est pas connecté
+    if(identifiantUserValue == 0)
+    {
+        window.location.href = '{{ path("app_redirectionRecherche") }}';
+    }
+
+
+
+    //Affichage de l'identifiant de connexion
+    const scriptConnexionPseudo = document.createElement('script');
+    scriptConnexionPseudo.src = "{{ asset('js/appelApi.js') }}";
+    scriptConnexionPseudo.setAttribute('data-api-option', 'getConnexionPseudo,'+ idUserBddConnexion);
+
+    document.body.appendChild(scriptConnexionPseudo);
+
+    scriptConnexionPseudo.onload = function () {
+        document.body.removeChild(scriptConnexionPseudo);
+    };
+
+
+    function miseEnPlacePseudoConnexion(data) {
+
+        console.log(data.pseudo)
+        var pseudo = data.pseudo
+
+        var textPseudoConnexion = document.getElementById('identifiantConnexion');
+        textPseudoConnexion.textContent = pseudo;
+        
+    }
+
+
+
+    //Permet de récupérer les inforamtions du compte
     const script = document.createElement('script');
     script.src = "{{ asset('js/appelApi.js') }}";
     script.setAttribute('data-api-option', 'getSpecificStatutAccount,'+ identifiantUserValue);
@@ -96,7 +134,6 @@
     script.onload = function () {
         document.body.removeChild(script);
     };
-
 
 
     function miseEnPlaceStatutActuel(data) {
@@ -161,6 +198,12 @@
         };
     }
 
+
+    document.getElementById('bouttonDeconnexion').addEventListener('click', function () {
+        
+       window.location.href = '{{ path("app_deconnexionUser") }}';
+
+    });
 
 </script>
 

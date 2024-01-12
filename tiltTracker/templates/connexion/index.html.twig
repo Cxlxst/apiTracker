@@ -24,7 +24,7 @@
             <input type="password" id="inputMotDePasse" placeholder="Mot de passe" />
             <div class="sign-in">
                 <button id="executeApiButton">Connexion</button>
-                <a href= "faire lien vers la page de connexion"> Créer un compte</a> 
+                <a href= '/newuser'> Créer un compte</a> 
             </div>
         </div>
     </div>
@@ -69,6 +69,8 @@
     document.getElementById('recherche').addEventListener('click', function () {
         window.location.href = '{{ path("app_recherche") }}';
     });
+
+
 
 
 </script>

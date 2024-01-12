@@ -7,9 +7,13 @@ use App\Repository\MatchUserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: MatchUserRepository::class)]
 #[ApiResource]
+#[ApiFilter(SearchFilter::class, properties: ['user_id' => 'exact'])]
+#[ApiResource(paginationEnabled: false)]
 
 class MatchUser
 {
@@ -18,7 +22,7 @@ class MatchUser
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'matchUser', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'matchUser')]
     private ?Users $user_id = null;
 
     #[ORM\Column]
