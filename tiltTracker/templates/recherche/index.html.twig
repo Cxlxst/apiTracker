@@ -93,7 +93,8 @@
             // Create a div for the player's pseudo
             var pseudoDiv = document.createElement('div');
             pseudoDiv.className = 'player-data';
-            pseudoDiv.textContent = item.pseudo;
+            let pseudo = item.pseudo
+            pseudoDiv.textContent = pseudo.charAt(0).toUpperCase() + pseudo.slice(1);item.pseudo;
             playerRow.appendChild(pseudoDiv);
 
             // Create the divider
