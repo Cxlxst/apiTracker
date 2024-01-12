@@ -291,7 +291,7 @@ else if (apiOption[0] === 'suppressionUser') {
       throw new Error('La requête a échoué.');
     }
     console.log('Suppression accès connexion réussie.');
-    window.location.href = "/connexion";
+    redirectionSuppresionCompte()
   })
   .catch(error => {
     console.error('Erreur lors de la requête DELETE:', error);

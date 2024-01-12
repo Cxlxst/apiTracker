@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UsersController!{% endblock %}
+{% block title %}TILT · Créer un compte{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/stylech.css') }}">
 {% endblock %}
@@ -9,22 +9,28 @@
 <div class="split-container">
     <div class="left-container">
     </div>
-    <div class="right-container-new">
-        <div class="welcomemsg">
-            <h1>Bienvenue sur Tilt Tracker, que souhaitez vous faire?</h1>
-        </div>
-        <div class="login-container">
-        <p>Pseudo</p>
-            <input type="text" id="inputPseudo" placeholder="Pseudo" />
-        <p>Mot de passe</p>
-            <input type="password" id="inputMotDePasse" placeholder="Mot de passe" />
-        <p>Confirmer le mot de passe</p>
-            <input type="password" id="inputMotDePasseVerif" placeholder="Mot de passe" />
+        <div class="right-container-new">
+        {# <div class="box-container-all"> #}
+            <div class="welcomemsg">
+                <h1>Création de votre compte Tilt</h1>
+            </div>
+
+            <div class="login-container">
+            <p>Pseudo</p>
+                <input type="text" id="inputPseudo" placeholder="Pseudo" />
+            <p>Mot de passe</p>
+                <input type="password" id="inputMotDePasse" placeholder="Mot de passe" />
+            <p>Confirmer le mot de passe</p>
+                <input type="password" id="inputMotDePasseVerif" placeholder="Mot de passe" />
+            
             <div class="buttons">
                 <button id="executeApiButton">Créer un compte</button>
-                <a href='/connexion'>Se connecter</a>
+                <p>Déja un compte?</p><a href="/connexion">Se connecter</a>
             </div>
-        </div>
+            </div>
+
+            
+        {# </div> #}
     </div>
 </div>
 
