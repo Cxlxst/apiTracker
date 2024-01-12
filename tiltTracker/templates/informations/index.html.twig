@@ -6,8 +6,8 @@
 {% endblock %}
 {% block body %}
 
-<input type="text" id="identifiantUser" value="{{ app.session.get('idConnexion') }}">
-<input type="text" id="identifiantUserBddConnexion" value="{{ app.session.get('idUserBddConnexion') }}">
+<input type="hidden" id="identifiantUser" value="{{ app.session.get('idConnexion') }}">
+<input type="hidden" id="identifiantUserBddConnexion" value="{{ app.session.get('idUserBddConnexion') }}">
 
 {# <input type="text" id="statutActuelUser"> #}
 

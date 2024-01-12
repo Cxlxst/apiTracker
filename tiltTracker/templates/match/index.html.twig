@@ -7,7 +7,7 @@
 {% endblock %}
 {% block body %}
 
-<input type="text" id="identifiantUser" value="{{ app.session.get('idConnexion') }}">
+<input type="hidden" id="identifiantUser" value="{{ app.session.get('idConnexion') }}">
 
 <div class="split-container">
     <div class="left-container-classic">

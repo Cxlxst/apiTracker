@@ -16,7 +16,7 @@
     th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
 </style>
 
-<input type="text" id="identifiantUser" value="{{ app.session.get('idConnexion') }}">
+<input type="hidden" id="identifiantUser" value="{{ app.session.get('idConnexion') }}">
 
 <div class="split-container">
     
@@ -47,7 +47,7 @@
         </div>
 
     </div>
-
+   
     <div class="right-container-inf">
         <div class="containerfix">
             <div class="search-container">
@@ -55,7 +55,9 @@
             </div>
             <div class="example-wrapper">
                 <h2>Liste de nos joueurs</h2>
-                <div id="divListeJoueur"></div>
+                <div class="divlisteJoueurAffichage">
+                    <div id="divListeJoueur"></div>
+                </div>
                 <script src="{{ asset('js/appelApi.js') }}" data-api-option="getListe"></script>
             </div>
         </div>
@@ -82,6 +84,8 @@
         var fragment = document.createDocumentFragment();
 
         data.forEach(function(item) {
+            var playerContainer = document.createElement('div'); // New container div
+            playerContainer.className = 'player-container'; // Add a class if needed
             // Create a container div for each player that mimics a table row
             var playerRow = document.createElement('div');
             playerRow.className = 'player-row';
@@ -93,30 +97,11 @@
             playerRow.appendChild(pseudoDiv);
 
             // Create the divider
-            var divider = document.createElement('div');
-            divider.className = 'player-divider';
-            playerRow.appendChild(divider);
-
-            // Create a container for the player's status and image
-            var statusContainer = document.createElement('div');
-            statusContainer.className = 'player-status-container';
-
-            // Create an img element for the status icon
-            var statusImg = document.createElement('img');
-            statusImg.className = 'status-image';
-            statusImg.src = BASE_URL + (item.statut === 'Profil privé' ? 'build/images/Eyepub.png' : 'build/images/Eyepriv.png'); // Replace with actual paths
-            statusContainer.appendChild(statusImg);
-
-            // Create a div for the player's status text
-            var statusDiv = document.createElement('div');
-            statusDiv.className = 'player-data';
-            statusDiv.textContent = item.statut;
-            statusContainer.appendChild(statusDiv);
-
-            // Add the status container to the player row
-            playerRow.appendChild(statusContainer);
-
+            //var divider = document.createElement('div');
+            //divider.className = 'player-divider';
+            //playerRow.appendChild(divider);  
             if (item.statut == 'public') {
+                
                 var button = document.createElement('button');
                 button.textContent = 'Voir le profil';
                 button.className = 'view-profile-button';
@@ -125,9 +110,33 @@
                 });
                 playerRow.appendChild(button);
             }
+            else
+            {
+
+                // Create a container for the player's status and image
+                var statusContainer = document.createElement('div');
+                statusContainer.className = 'player-status-container';
+
+                // Create an img element for the status icon
+                var statusImg = document.createElement('img');
+                statusImg.className = 'status-image';
+                statusImg.src = BASE_URL + (item.statut === 'Profil privé' ? 'build/images/Eyepub.png' : 'build/images/Eyepriv.png'); // Replace with actual paths
+                statusContainer.appendChild(statusImg);
+
+                // Create a div for the player's status text
+                var statusDiv = document.createElement('div');
+                statusDiv.className = 'player-data';
+                statusDiv.textContent = item.statut;
+                statusContainer.appendChild(statusDiv);
+
+                // Add the status container to the player row
+                playerRow.appendChild(statusContainer);
+                            
+            }
 
             // Append the player row to the document fragment
-            fragment.appendChild(playerRow);
+            playerContainer.appendChild(playerRow); // Append the row to the new container
+            fragment.appendChild(playerContainer); // Append the container to the document fragment
         });
 
         // Select the div where the player rows should be displayed
