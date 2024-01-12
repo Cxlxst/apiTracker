@@ -41,8 +41,9 @@
                     <button class="native"><img src="../build/images/visibility.png">Visibilité</button>
                 </a>
             </div>
-            <div class="nav-bar-log-out">
-                <button id="bouttonConnexionDeconnexion" class="native"><img src="../build/images/log_out.png">Déconnexion</button>
+            <div id="nav-bar-log-out">
+
+                <button id="bouttonConnexionDeconnexion"class="native"><span><img src="../build/images/log_out.png"></span>Déconnexion</button>
             </div>
         </div>
 
@@ -50,15 +51,14 @@
    
     <div class="right-container-inf">
         <div class="containerfix">
+                        <h2>Liste de nos joueurs</h2>
             <div class="search-container">
                 <input type="text" id="inputRecherche" class="search-bar" placeholder="Rechercher un joueur" />
             </div>
             <div class="example-wrapper">
-                <h2>Liste de nos joueurs</h2>
                 <div class="divlisteJoueurAffichage">
-                    <div id="divListeJoueur"></div>
+                    <div id="divListeJoueur"><script src="{{ asset('js/appelApi.js') }}" data-api-option="getListe"></script></div>
                 </div>
-                <script src="{{ asset('js/appelApi.js') }}" data-api-option="getListe"></script>
             </div>
         </div>
     </div>
@@ -216,7 +216,7 @@
 
     if(identifiantUserValue != 0)
     {
-        buttonConnexionDeconnexion.innerHTML = 'Deconnexion';
+        buttonConnexionDeconnexion.innerHTML = '<span><img src="../build/images/log_out.png">Deconnexion';
 
         buttonConnexionDeconnexion.addEventListener('click', function () { 
             window.location.href = '{{ path("app_deconnexionUser") }}';
@@ -224,7 +224,7 @@
     }
     else
     {
-        buttonConnexionDeconnexion.innerHTML = 'Connexion';
+        buttonConnexionDeconnexion.innerHTML = '<span><img src="../build/images/log_out.png">Connexion';
 
 
         buttonConnexionDeconnexion.addEventListener('click', function () { 
